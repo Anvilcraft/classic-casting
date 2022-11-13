@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-
+    implementation "thaumcraft:Thaumcraft:1.7.10-4.2.3.5:deobf"
 }
 
 processResources {
