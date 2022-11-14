@@ -23,21 +23,27 @@ apply plugin: 'maven-publish'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-version = "1.0"
-group= "modgroup"
-archivesBaseName = "modid"
+version = "0.1.0"
+group= "dev.tilera"
+archivesBaseName = "classic-casting"
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "run"
+
+    replaceIn "dev/tilera/classiccasting/ClassicCasting.java"
+    replace "@VERSION@", project.version
 }
 
 repositories {
     maven { url = "https://maven.tilera.xyz" }
+    maven { url = "https://jitpack.io" }
 }
 
 dependencies {
     implementation "thaumcraft:Thaumcraft:1.7.10-4.2.3.5:deobf"
+    implementation "dev.tilera:auracore:0.1.0:deobf"
+    implementation "com.github.tox1cozZ:mixin-booter-legacy:1.1.2"
 }
 
 processResources {

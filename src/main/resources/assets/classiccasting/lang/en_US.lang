@@ -1,0 +1,14 @@
+itemGroup.classiccasting=Classic Casting
+
+item.classiccasting:portableHole.name=Portable Hole
+
+item.classiccasting:wandCastingApprentice.name=Wand of the Apprentice
+item.classiccasting:wandCastingAdept.name=Wand of the Adept
+item.classiccasting:wandCastingMage.name=Wand of the Thaumaturge
+
+item.classiccasting:wandExcavation.name=Wand of Excavation
+item.classiccasting:wandFire.name=Wand of Fire
+item.classiccasting:wandFrost.name=Wand of Frost
+item.classiccasting:hellrod.name=Rod of Hell
+item.classiccasting:wandLightning.name=Wand of Lightning
+item.classiccasting:wandTrade.name=Wand of Equal Trade
