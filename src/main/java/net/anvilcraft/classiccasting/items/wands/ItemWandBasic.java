@@ -1,8 +1,8 @@
-package dev.tilera.classiccasting.items.wands;
+package net.anvilcraft.classiccasting.items.wands;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import dev.tilera.classiccasting.ClassicCastingTab;
+import net.anvilcraft.classiccasting.ClassicCastingTab;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;

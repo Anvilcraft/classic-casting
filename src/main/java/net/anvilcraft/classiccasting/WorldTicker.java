@@ -1,4 +1,4 @@
-package dev.tilera.classiccasting;
+package net.anvilcraft.classiccasting;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +10,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.relauncher.Side;
-import dev.tilera.classiccasting.items.wands.ItemWandTrade;
+import net.anvilcraft.classiccasting.items.wands.ItemWandTrade;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

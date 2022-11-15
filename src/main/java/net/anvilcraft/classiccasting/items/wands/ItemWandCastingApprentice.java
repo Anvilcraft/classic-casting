@@ -1,46 +1,47 @@
-package dev.tilera.classiccasting.items.wands;
+package net.anvilcraft.classiccasting.items.wands;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemWandCastingAdept extends ItemWandCasting {
+public class ItemWandCastingApprentice extends ItemWandCasting
+{
     public IIcon icon;
-
-    public ItemWandCastingAdept() {
+    
+    public ItemWandCastingApprentice() {
         super();
         super.maxStackSize = 1;
         super.canRepair = false;
-        this.setUnlocalizedName("classiccasting:wandCastingAdept");
+        this.setUnlocalizedName("classiccasting:wandCastingApprentice");
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public void registerIcons(final IIconRegister ir) {
-        this.icon = ir.registerIcon("classiccasting:wandadept");
+        this.icon = ir.registerIcon("classiccasting:wandapprentice");
     }
-
+    
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(final int par1) {
         return this.icon;
     }
-
-    @Override
-    public EnumRarity getRarity(final ItemStack itemstack) {
-        return EnumRarity.rare;
-    }
-
+    
     @Override
     public int getMaxVis(ItemStack i) {
-        return 250;
+        return 50;
     }
-
+    
+    @Override
+    public EnumRarity getRarity(final ItemStack itemstack) {
+        return EnumRarity.uncommon;
+    }
+    
     @Override
     public int getRechargeInterval() {
-        return 7;
+        return 10;
     }
 }

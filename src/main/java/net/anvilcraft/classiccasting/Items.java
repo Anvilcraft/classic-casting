@@ -1,16 +1,16 @@
-package dev.tilera.classiccasting;
+package net.anvilcraft.classiccasting;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import dev.tilera.classiccasting.items.ItemPortableHole;
-import dev.tilera.classiccasting.items.wands.ItemHellrod;
-import dev.tilera.classiccasting.items.wands.ItemWandCastingAdept;
-import dev.tilera.classiccasting.items.wands.ItemWandCastingApprentice;
-import dev.tilera.classiccasting.items.wands.ItemWandCastingMage;
-import dev.tilera.classiccasting.items.wands.ItemWandExcavation;
-import dev.tilera.classiccasting.items.wands.ItemWandFire;
-import dev.tilera.classiccasting.items.wands.ItemWandFrost;
-import dev.tilera.classiccasting.items.wands.ItemWandLightning;
-import dev.tilera.classiccasting.items.wands.ItemWandTrade;
+import net.anvilcraft.classiccasting.items.ItemPortableHole;
+import net.anvilcraft.classiccasting.items.wands.ItemHellrod;
+import net.anvilcraft.classiccasting.items.wands.ItemWandCastingAdept;
+import net.anvilcraft.classiccasting.items.wands.ItemWandCastingApprentice;
+import net.anvilcraft.classiccasting.items.wands.ItemWandCastingMage;
+import net.anvilcraft.classiccasting.items.wands.ItemWandExcavation;
+import net.anvilcraft.classiccasting.items.wands.ItemWandFire;
+import net.anvilcraft.classiccasting.items.wands.ItemWandFrost;
+import net.anvilcraft.classiccasting.items.wands.ItemWandLightning;
+import net.anvilcraft.classiccasting.items.wands.ItemWandTrade;
 import net.minecraft.item.Item;
 
 public class Items {

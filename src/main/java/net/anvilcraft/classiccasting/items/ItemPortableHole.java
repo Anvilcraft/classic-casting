@@ -1,10 +1,10 @@
-package dev.tilera.classiccasting.items;
+package net.anvilcraft.classiccasting.items;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dev.tilera.auracore.aura.AuraManager;
-import dev.tilera.classiccasting.ClassicCastingTab;
+import net.anvilcraft.classiccasting.ClassicCastingTab;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;

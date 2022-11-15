@@ -1,4 +1,4 @@
-package dev.tilera.classiccasting;
+package net.anvilcraft.classiccasting;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.LanguageRegistry;

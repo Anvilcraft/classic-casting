@@ -1,4 +1,4 @@
-package dev.tilera.classiccasting;
+package net.anvilcraft.classiccasting;
 
 import java.util.List;
 

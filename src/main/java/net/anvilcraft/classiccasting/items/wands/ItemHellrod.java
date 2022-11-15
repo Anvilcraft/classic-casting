@@ -1,9 +1,9 @@
-package dev.tilera.classiccasting.items.wands;
+package net.anvilcraft.classiccasting.items.wands;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dev.tilera.auracore.aura.AuraManager;
-import dev.tilera.classiccasting.Utils;
+import net.anvilcraft.classiccasting.Utils;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;

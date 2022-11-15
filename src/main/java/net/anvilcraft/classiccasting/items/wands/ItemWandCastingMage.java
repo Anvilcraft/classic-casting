@@ -1,4 +1,4 @@
-package dev.tilera.classiccasting.items.wands;
+package net.anvilcraft.classiccasting.items.wands;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

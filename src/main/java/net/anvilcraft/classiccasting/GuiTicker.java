@@ -1,11 +1,11 @@
-package dev.tilera.classiccasting;
+package net.anvilcraft.classiccasting;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
-import dev.tilera.classiccasting.items.wands.ItemHellrod;
-import dev.tilera.classiccasting.items.wands.ItemWandCasting;
-import dev.tilera.classiccasting.items.wands.ItemWandTrade;
+import net.anvilcraft.classiccasting.items.wands.ItemHellrod;
+import net.anvilcraft.classiccasting.items.wands.ItemWandCasting;
+import net.anvilcraft.classiccasting.items.wands.ItemWandTrade;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;

@@ -1,4 +1,4 @@
-package dev.tilera.classiccasting;
+package net.anvilcraft.classiccasting;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;

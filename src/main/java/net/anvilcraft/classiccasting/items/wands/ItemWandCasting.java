@@ -1,12 +1,12 @@
-package dev.tilera.classiccasting.items.wands;
+package net.anvilcraft.classiccasting.items.wands;
 
 import java.util.List;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import dev.tilera.auracore.api.IWand;
 import dev.tilera.auracore.aura.AuraManager;
-import dev.tilera.classiccasting.ClassicCastingTab;
-import dev.tilera.classiccasting.WandManager;
+import net.anvilcraft.classiccasting.ClassicCastingTab;
+import net.anvilcraft.classiccasting.WandManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;

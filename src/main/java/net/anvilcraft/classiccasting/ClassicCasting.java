@@ -1,4 +1,4 @@
-package dev.tilera.classiccasting;
+package net.anvilcraft.classiccasting;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -13,8 +13,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 public class ClassicCasting {
     @SidedProxy(
         modId = "classiccasting",
-        clientSide = "dev.tilera.classiccasting.ClientProxy",
-        serverSide = "dev.tilera.classiccasting.CommonProxy"
+        clientSide = "net.anvilcraft.classiccasting.ClientProxy",
+        serverSide = "net.anvilcraft.classiccasting.CommonProxy"
     )
     public static CommonProxy proxy;
 
