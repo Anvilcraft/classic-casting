@@ -57,6 +57,7 @@ public class ItemWandBasic extends Item {
         //        itemstack.damageItem(1, (EntityLiving) p);
         //    }
         //}
+        itemstack.damageItem(1, p);
         return itemstack;
     }
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
@@ -196,5 +197,25 @@ public class Utils {
         final double var20 = range;
         final Vec3 var21 = var13.addVector(var18 * var20, var17 * var20, var19 * var20);
         return world.rayTraceBlocks(var13, var21, par3);
+    }
+
+    public static int isPlayerCarrying(final EntityPlayer player, final ItemStack stack) {
+        for (int var2 = 0; var2 < player.inventory.mainInventory.length; ++var2) {
+            if (player.inventory.mainInventory[var2] != null
+                && player.inventory.mainInventory[var2].isItemEqual(stack)) {
+                return var2;
+            }
+        }
+        return -1;
+    }
+
+    public static boolean
+    isBlockExposed(final World world, final int x, final int y, final int z) {
+        return !world.getBlock(x, y, z + 1).isOpaqueCube()
+            || !world.getBlock(x, y, z - 1).isOpaqueCube()
+            || !world.getBlock(x + 1, y, z).isOpaqueCube()
+            || !world.getBlock(x - 1, y, z).isOpaqueCube()
+            || !world.getBlock(x, y + 1, z).isOpaqueCube()
+            || !world.getBlock(x, y - 1, z).isOpaqueCube();
     }
 }

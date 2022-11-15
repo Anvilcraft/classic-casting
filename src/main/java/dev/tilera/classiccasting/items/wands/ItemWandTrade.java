@@ -3,17 +3,18 @@ package dev.tilera.classiccasting.items.wands;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dev.tilera.auracore.aura.AuraManager;
+import dev.tilera.classiccasting.WorldTicker;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import thaumcraft.common.lib.events.ServerTickEventsFML;
 
 public class ItemWandTrade extends ItemWandBasic {
     public IIcon icon;
@@ -49,7 +50,7 @@ public class ItemWandTrade extends ItemWandBasic {
         }
         if (!w.isRemote && e.ticksExisted % 50 == 0 && is.getItemDamage() > 0
             && AuraManager.decreaseClosestAura(w, e.posX, e.posY, e.posZ, 1)) {
-            is.damageItem(-4, (EntityLiving) e);
+            is.damageItem(-4, (EntityLivingBase) e);
             if (is.getItemDamage() < 0) {
                 is.setItemDamage(0);
             }
@@ -84,14 +85,15 @@ public class ItemWandTrade extends ItemWandBasic {
             if (pb != null && world.isRemote) {
                 player.swingItem();
             } else if (pb != null && world.getTileEntity(x, y, z) == null) {
-                ServerTickEventsFML.addSwapper(
+                WorldTicker.addSwapper(
                     world,
                     x,
                     y,
                     z,
                     world.getBlock(x, y, z),
                     world.getBlockMetadata(x, y, z),
-                    pb,
+                    Block.getBlockFromItem(pb.getItem()),
+                    pb.getItemDamage(),
                     3 + this.getPotency(itemstack),
                     player,
                     player.inventory.currentItem
@@ -124,20 +126,26 @@ public class ItemWandTrade extends ItemWandBasic {
         final ItemStack pb = this.getPickedBlock(itemstack);
         if (pb == null || !((Entity) player).worldObj.isRemote) {
             if (pb != null && ((Entity) player).worldObj.getTileEntity(x, y, z) == null) {
-                ServerTickEventsFML.addSwapper(
+                WorldTicker.addSwapper(
                     ((Entity) player).worldObj,
                     x,
                     y,
                     z,
                     ((Entity) player).worldObj.getBlock(x, y, z),
                     ((Entity) player).worldObj.getBlockMetadata(x, y, z),
-                    pb,
+                    Block.getBlockFromItem(pb.getItem()),
+                    pb.getItemDamage(),
                     0,
                     player,
                     player.inventory.currentItem
                 );
             }
         }
+
+        // TODO: This is required because the game currently is too retarded to realize
+        // the block has, in fact, not been broken when it's instamined. Maybe theres a
+        // better workaround?
+        player.worldObj.markBlockForUpdate(x, y, z);
         return true;
     }
 

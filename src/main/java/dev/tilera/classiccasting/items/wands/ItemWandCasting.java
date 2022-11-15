@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import dev.tilera.auracore.api.IWand;
 import dev.tilera.auracore.aura.AuraManager;
 import dev.tilera.classiccasting.ClassicCastingTab;
+import dev.tilera.classiccasting.WandManager;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -21,7 +22,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.common.config.Config;
 import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
-import thaumcraft.common.items.wands.WandManager;
 import thaumcraft.common.lib.research.ResearchManager;
 import thaumcraft.common.tiles.TileArcaneBore;
 import thaumcraft.common.tiles.TileArcaneBoreBase;
@@ -292,18 +292,15 @@ public abstract class ItemWandCasting extends Item implements IWand {
             }
         }
         if (bi == Blocks.bookshelf) {
-            // TODO: wrong WandManager, this is gonna throw a CCE
             result = WandManager.createThaumonomicon(itemstack, player, world, x, y, z);
         }
         if (bi == Blocks.cauldron) {
-            // TODO: same here
             result = WandManager.createCrucible(itemstack, player, world, x, y, z);
         }
         if ((bi == Blocks.obsidian || bi == Blocks.nether_brick || bi == Blocks.iron_bars)
             && ResearchManager.isResearchComplete(
                 player.getDisplayName(), "INFERNALFURNACE"
             )) {
-            // TODO: you get the point
             result = WandManager.createArcaneFurnace(itemstack, player, world, x, y, z);
         }
         // TODO: WTF
