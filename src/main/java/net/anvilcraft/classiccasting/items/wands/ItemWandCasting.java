@@ -182,7 +182,6 @@ public abstract class ItemWandCasting extends Item implements IWand {
         boolean result = false;
         final ForgeDirection direction = ForgeDirection.getOrientation(side);
         if (bi == ConfigBlocks.blockTable && md <= 1) {
-            // TODO: don't use original workbench here or mixinate it HARD
             world.setBlock(x, y, z, bi, 15, 3);
             world.setTileEntity(x, y, z, (TileEntity) new TileArcaneWorkbench());
             final TileArcaneWorkbench tawb

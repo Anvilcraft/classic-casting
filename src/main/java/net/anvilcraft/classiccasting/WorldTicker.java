@@ -29,11 +29,7 @@ public class WorldTicker {
     @SubscribeEvent
     public void onWorldTick(WorldTickEvent ev) {
         if (ev.phase == TickEvent.Phase.END && ev.side == Side.SERVER)
-            this.tickEnd(ev.world);
-    }
-
-    private void tickEnd(World world) {
-        this.swapTicks(world);
+            this.swapTicks(ev.world);
     }
 
     private void swapTicks(World world) {
@@ -60,7 +56,9 @@ public class WorldTicker {
                     final int slot = Utils.isPlayerCarrying(
                         vs.player, new ItemStack(vs.bTarget, 1, vs.mTarget)
                     );
-                    if (vs.bSource != bi || vs.mSource != md || slot < 0) {
+                    if (vs.bSource != bi || vs.mSource != md
+                        || !vs.bTarget.canBlockStay(world, vs.x, vs.y, vs.z)
+                        || slot < 0) {
                         continue;
                     }
                     didSomething = true;

@@ -21,7 +21,11 @@ public class ClassicCasting {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent ev) {
         ClassicCastingTab.INSTANCE = new ClassicCastingTab();
-        Items.init();
+
+        CCBlocks.init();
+        CCItems.init();
+        proxy.registerTileEntities();
+
         proxy.preInit();
     }
 }

@@ -12,6 +12,6 @@ public class ClassicCastingTab extends CreativeTabs {
 
     @Override
     public Item getTabIconItem() {
-        return Items.wandExcavation;
+        return CCItems.wandExcavation;
     }
 }

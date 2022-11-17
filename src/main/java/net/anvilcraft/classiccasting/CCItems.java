@@ -13,7 +13,7 @@ import net.anvilcraft.classiccasting.items.wands.ItemWandLightning;
 import net.anvilcraft.classiccasting.items.wands.ItemWandTrade;
 import net.minecraft.item.Item;
 
-public class Items {
+public class CCItems {
     public static Item portableHole;
 
     public static Item wandCastingApprentice;

@@ -7,7 +7,6 @@ import net.anvilcraft.classiccasting.WorldTicker;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -82,9 +81,9 @@ public class ItemWandTrade extends ItemWandBasic {
             player.swingItem();
         } else {
             final ItemStack pb = this.getPickedBlock(itemstack);
-            if (pb != null && world.isRemote) {
+            if (pb != null && pb.getItem() != null && world.isRemote) {
                 player.swingItem();
-            } else if (pb != null && world.getTileEntity(x, y, z) == null) {
+            } else if (pb != null && pb.getItem() != null && world.getTileEntity(x, y, z) == null) {
                 WorldTicker.addSwapper(
                     world,
                     x,

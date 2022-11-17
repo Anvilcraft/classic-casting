@@ -1,3 +1,5 @@
+# ---- ITEMS ----
+
 itemGroup.classiccasting=Classic Casting
 
 item.classiccasting:portableHole.name=Portable Hole
@@ -12,3 +14,7 @@ item.classiccasting:wandFrost.name=Wand of Frost
 item.classiccasting:hellrod.name=Rod of Hell
 item.classiccasting:wandLightning.name=Wand of Lightning
 item.classiccasting:wandTrade.name=Wand of Equal Trade
+
+# ---- BLOCKS ----
+
+tile.classiccasting:alembic.name=Arcane Alembic
