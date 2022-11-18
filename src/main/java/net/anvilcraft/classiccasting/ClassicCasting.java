@@ -2,7 +2,9 @@ package net.anvilcraft.classiccasting;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 @Mod(
     modid = "classiccasting",
@@ -11,6 +13,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
     dependencies = "required-after:Thaumcraft"
 )
 public class ClassicCasting {
+    @Mod.Instance
+    public static ClassicCasting INSTANCE;
+
     @SidedProxy(
         modId = "classiccasting",
         clientSide = "net.anvilcraft.classiccasting.ClientProxy",
@@ -27,5 +32,10 @@ public class ClassicCasting {
         proxy.registerTileEntities();
 
         proxy.preInit();
+    }
+
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent ev) {
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
     }
 }

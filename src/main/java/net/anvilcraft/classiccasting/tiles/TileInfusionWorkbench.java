@@ -107,10 +107,10 @@ public class TileInfusionWorkbench extends TileMagicWorkbench {
                         if (te != null && te instanceof IAspectSource) {
                             final IAspectSource ts = (IAspectSource) te;
                             for (final Aspect tag2 : ts.getAspects().getAspects()) {
-                                if (ts.containerContains(tag2)
+                                if (ts.getAspects().getAmount(tag2)
                                     > this.foundAspects.getAmount(tag2)) {
                                     this.foundAspects.merge(
-                                        tag2, ts.containerContains(tag2)
+                                        tag2, ts.getAspects().getAmount(tag2)
                                     );
                                     this.foundAspects.linkSource(tag2, ts);
                                 }
@@ -168,42 +168,6 @@ public class TileInfusionWorkbench extends TileMagicWorkbench {
 
         this.foundAspects.readFromNBT(nbt.getCompoundTag("aspects"));
     }
-
-    //public static void handlePacket(final ByteArrayDataInput dat) {
-    //    final World world = Thaumcraft.proxy.getClientWorld();
-    //    final int x = dat.readInt();
-    //    final int y = dat.readInt();
-    //    final int z = dat.readInt();
-    //    final short id = dat.readShort();
-    //    final short dmg = dat.readShort();
-    //    final InfuserAspectList ot = new InfuserAspectList();
-    //    try {
-    //        while (true) {
-    //            final int tid = dat.readByte();
-    //            final int tam = dat.readShort();
-    //            final int sx = dat.readInt();
-    //            final int sy = dat.readInt();
-    //            final int sz = dat.readInt();
-    //            final TileEntity te = world.getTileEntity(sx, sy, sz);
-    //            if (te != null && te instanceof IAspectSource) {
-    //                ot.merge(Aspect.get(tid), tam);
-    //                ot.linkSource(Aspect.get(tid), (IAspectSource) te);
-    //            }
-    //        }
-    //    } catch (final Exception e) {
-    //        final TileEntity te2 = world.getTileEntity(x, y, z);
-    //        if (te2 instanceof TileInfusionWorkbench && id != 0) {
-    //            ((TileInfusionWorkbench) te2)
-    //                .setInventorySlotContentsSoftly(10, new ItemStack(id, 1, (int)
-    //                dmg));
-    //            ((TileInfusionWorkbench) te2).foundAspects = ot;
-    //            if (((TileInfusionWorkbench) te2).eventHandler != null) {
-    //                ((TileInfusionWorkbench) te2)
-    //                    .eventHandler.onCraftMatrixChanged((IInventory) te2);
-    //            }
-    //        }
-    //    }
-    //}
 
     @Override
     public void openInventory() {}

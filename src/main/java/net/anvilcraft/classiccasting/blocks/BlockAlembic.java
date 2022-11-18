@@ -4,35 +4,44 @@ import java.util.List;
 
 import dev.tilera.auracore.aura.AuraManager;
 import net.anvilcraft.classiccasting.ClassicCastingTab;
+import net.anvilcraft.classiccasting.render.BlockAlembicRenderer;
 import net.anvilcraft.classiccasting.tiles.TileAlembic;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.common.lib.CustomSoundType;
 import thaumcraft.common.tiles.TileCrucible;
 
 public class BlockAlembic extends BlockContainer {
+    public IIcon iconGlow;
+
     public BlockAlembic() {
         super(Material.iron);
         this.setHardness(3.0f);
         this.setResistance(17.0f);
-        this.setStepSound(Block.soundTypeMetal);
+        this.setStepSound(new CustomSoundType("jar", 1.0f, 1.0f));
         this.setBlockName("classiccasting:alembic");
         this.setBlockBounds(0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f);
         this.setCreativeTab(ClassicCastingTab.INSTANCE);
     }
 
     @Override
+    public void registerBlockIcons(IIconRegister ir) {
+        this.iconGlow = ir.registerIcon("thaumcraft:animatedglow");
+    }
+
+    @Override
     public int getRenderType() {
-        // TODO: WTF
-        //return Config.blockCrucibleRI;
-        return 0;
+        return BlockAlembicRenderer.RI;
     }
 
     @Override
@@ -122,7 +131,7 @@ public class BlockAlembic extends BlockContainer {
                 par2 + 0.5f,
                 par3 + 0.5f,
                 par4 + 0.5f,
-                new AspectList().add(((TileAlembic) te).tag, ((TileAlembic) te).amount)
+                new AspectList().add(((TileAlembic) te).aspect, ((TileAlembic) te).amount)
             );
         }
         super.breakBlock(par1World, par2, par3, par4, par5, par6);

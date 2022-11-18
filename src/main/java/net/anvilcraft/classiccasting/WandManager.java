@@ -2,6 +2,7 @@ package net.anvilcraft.classiccasting;
 
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import dev.tilera.auracore.api.IWand;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,54 +43,37 @@ public class WandManager {
     ) {
         final int discount = 100 - Math.min(50, getTotalVisDiscount(player));
         amount = Math.round(amount * (discount / 100.0f));
-        if (itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("vis")) {
-            final int charge = itemstack.stackTagCompound.getShort("vis");
-            if (world.isRemote) {
-                if (charge >= amount) {
-                    player.swingItem();
-                    return true;
-                }
-                return false;
-            } else {
-                if (charge >= amount) {
-                    if (!player.capabilities.isCreativeMode) {
-                        itemstack.setTagInfo(
-                            "vis", new NBTTagShort((short) (charge - amount))
-                        );
-                    }
-                    world.playSoundAtEntity(
-                        (Entity) player, "thaumcraft:wand", 0.5f, 1.0f
-                    );
-                    return true;
-                }
-                if (amount > 0) {
-                    player.addChatMessage(new ChatComponentText(
-                        LanguageRegistry.instance().getStringLocalization(
-                            "tc.wandnocharge"
-                        )
-                    ));
-                }
+        final int charge = ((IWand) itemstack.getItem()).getVis(itemstack);
+        if (world.isRemote) {
+            if (charge >= amount) {
+                player.swingItem();
+                return true;
             }
+            return false;
+        } else {
+            if (player.capabilities.isCreativeMode
+                || ((IWand) itemstack.getItem()).consumeVis(itemstack, amount)) {
+                world.playSoundAtEntity((Entity) player, "thaumcraft:wand", 0.5f, 1.0f);
+                return true;
+            }
+            player.addChatMessage(new ChatComponentText(
+                LanguageRegistry.instance().getStringLocalization("tc.wandnocharge")
+            ));
         }
         return false;
+    }
+
+    public static boolean hasCharge(ItemStack is, EntityPlayer pl, int c) {
+        final int discount = 100 - Math.min(50, getTotalVisDiscount(pl));
+        c = Math.round(c * (discount / 100.0f));
+        return ((IWand) is.getItem()).getVis(is) >= c;
     }
 
     public static boolean
     spendCharge(final ItemStack itemstack, final EntityPlayer player, int amount) {
         final int discount = 100 - Math.min(50, getTotalVisDiscount(player));
         amount = Math.round(amount * (discount / 100.0f));
-        if (itemstack.hasTagCompound() && itemstack.stackTagCompound.hasKey("vis")) {
-            final int charge = itemstack.stackTagCompound.getShort("vis");
-            if (charge >= amount) {
-                if (!player.capabilities.isCreativeMode) {
-                    itemstack.setTagInfo(
-                        "vis", new NBTTagShort((short) (charge - amount))
-                    );
-                }
-                return true;
-            }
-        }
-        return false;
+        return ((IWand) itemstack.getItem()).consumeVis(itemstack, amount);
     }
 
     public static boolean
@@ -225,5 +209,62 @@ public class WandManager {
             }
         }
         return fencefound;
+    }
+
+    public static boolean createInfusionWorkbench(
+        final ItemStack itemstack,
+        final EntityPlayer player,
+        final World world,
+        final int x,
+        final int y,
+        final int z
+    ) {
+        for (int xx = x - 1; xx <= x; ++xx) {
+            int zz = z - 1;
+            while (zz <= z) {
+                if (fitInfusionWorkbench(world, xx, y, zz)
+                    && spendCharge(world, itemstack, player, 25)) {
+                    if (!world.isRemote) {
+                        world.setBlock(xx, y, zz, CCBlocks.infusionWorkbench, 1, 0);
+                        world.setBlock(xx + 1, y, zz, CCBlocks.infusionWorkbench, 2, 0);
+                        world.setBlock(xx, y, zz + 1, CCBlocks.infusionWorkbench, 3, 0);
+                        world.setBlock(
+                            xx + 1, y, zz + 1, CCBlocks.infusionWorkbench, 4, 0
+                        );
+                        world.addBlockEvent(xx, y, zz, CCBlocks.infusionWorkbench, 1, 0);
+                        world.addBlockEvent(
+                            xx + 1, y, zz, CCBlocks.infusionWorkbench, 1, 0
+                        );
+                        world.addBlockEvent(
+                            xx, y, zz + 1, CCBlocks.infusionWorkbench, 1, 0
+                        );
+                        world.addBlockEvent(
+                            xx + 1, y, zz + 1, CCBlocks.infusionWorkbench, 1, 0
+                        );
+                        world.markBlockForUpdate(xx, y, zz);
+                        world.markBlockForUpdate(xx + 1, y, zz);
+                        world.markBlockForUpdate(xx, y, zz + 1);
+                        world.markBlockForUpdate(xx + 1, y, zz + 1);
+                        return true;
+                    }
+                    return false;
+                } else {
+                    ++zz;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean
+    fitInfusionWorkbench(final World world, final int x, final int y, final int z) {
+        return world.getBlock(x, y, z) == CCBlocks.infusionWorkbench
+            && world.getBlockMetadata(x, y, z) == 0
+            && world.getBlock(x + 1, y, z) == CCBlocks.infusionWorkbench
+            && world.getBlockMetadata(x + 1, y, z) == 0
+            && world.getBlock(x, y, z + 1) == CCBlocks.infusionWorkbench
+            && world.getBlockMetadata(x, y, z + 1) == 0
+            && world.getBlock(x + 1, y, z + 1) == CCBlocks.infusionWorkbench
+            && world.getBlockMetadata(x + 1, y, z + 1) == 0;
     }
 }

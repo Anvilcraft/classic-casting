@@ -5,6 +5,7 @@ import java.util.List;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import dev.tilera.auracore.api.IWand;
 import dev.tilera.auracore.aura.AuraManager;
+import net.anvilcraft.classiccasting.CCBlocks;
 import net.anvilcraft.classiccasting.ClassicCastingTab;
 import net.anvilcraft.classiccasting.WandManager;
 import net.minecraft.block.Block;
@@ -310,13 +311,11 @@ public abstract class ItemWandCasting extends Item implements IWand {
         //    result = WandManager.createNodeMagnet(itemstack, player, world, x, y, z);
         //}
 
-        // TODO: implement infusion workbench
-        //if (bi == ConfigBlocks.blockInfusionWorkbench
-        //    && ResearchManager.isResearchComplete(player.getDisplayName(), "MAGBLOCK"))
-        //    { result
-        //        = WandManager.createInfusionWorkbench(itemstack, player, world, x, y,
-        //        z);
-        //}
+        if (bi == CCBlocks.infusionWorkbench
+            /*&& ResearchManager.isResearchComplete(player.getDisplayName(), "MAGBLOCK")*/) {
+            result
+                = WandManager.createInfusionWorkbench(itemstack, player, world, x, y, z);
+        }
 
         // TODO: need alembics for this
         //if (bi == ConfigBlocks.blockMetalDevice && md >= 1 && md <= 4) {

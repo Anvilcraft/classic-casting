@@ -5,6 +5,10 @@ import java.util.Random;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.anvilcraft.classiccasting.ClassicCasting;
+import net.anvilcraft.classiccasting.ClassicCastingTab;
+import net.anvilcraft.classiccasting.GuiType;
+import net.anvilcraft.classiccasting.render.BlockInfusionWorkbenchRenderer;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -25,6 +29,7 @@ import net.minecraft.world.World;
 import thaumcraft.common.Thaumcraft;
 
 public class BlockInfusionWorkbench extends BlockContainer {
+    public IIcon iconGlow;
     public IIcon[] icon;
 
     public BlockInfusionWorkbench() {
@@ -33,16 +38,18 @@ public class BlockInfusionWorkbench extends BlockContainer {
         this.setHardness(4.0f);
         this.setResistance(100.0f);
         this.setStepSound(BlockInfusionWorkbench.soundTypeStone);
-        this.setBlockName("blockInfusionWorkbench");
+        this.setBlockName("classiccasting:infusionWorkbench");
+        this.setCreativeTab(ClassicCastingTab.INSTANCE);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(final IIconRegister ir) {
-        this.icon[0] = ir.registerIcon("thaumcraft:infusionbase");
+        this.icon[0] = ir.registerIcon("classiccasting:infusionbase");
         for (int a = 1; a <= 6; ++a) {
-            this.icon[a] = ir.registerIcon("thaumcraft:infusion" + a);
+            this.icon[a] = ir.registerIcon("classiccasting:infusion" + a);
         }
+        this.iconGlow = ir.registerIcon("classiccasting:animatedglow");
     }
 
     @Override
@@ -158,9 +165,7 @@ public class BlockInfusionWorkbench extends BlockContainer {
 
     @Override
     public int getRenderType() {
-        // TODO: WTF
-        //return Config.blockInfusionWorkbenchRI;
-        return 0;
+        return BlockInfusionWorkbenchRenderer.RI;
     }
 
     @Override
@@ -311,7 +316,14 @@ public class BlockInfusionWorkbench extends BlockContainer {
             return true;
         }
         if (tileEntity != null && tileEntity instanceof TileInfusionWorkbench) {
-            player.openGui((Object) Thaumcraft.instance, 14, world, x, y, z);
+            player.openGui(
+                ClassicCasting.INSTANCE,
+                GuiType.INFUSION_WORKBENCH.ordinal(),
+                world,
+                x,
+                y,
+                z
+            );
             return true;
         }
         switch (md) {
@@ -319,6 +331,14 @@ public class BlockInfusionWorkbench extends BlockContainer {
                 tileEntity = world.getTileEntity(x - 1, y, z);
                 if (tileEntity != null && tileEntity instanceof TileInfusionWorkbench) {
                     player.openGui((Object) Thaumcraft.instance, 14, world, x - 1, y, z);
+                    player.openGui(
+                        ClassicCasting.INSTANCE,
+                        GuiType.INFUSION_WORKBENCH.ordinal(),
+                        world,
+                        x - 1,
+                        y,
+                        z
+                    );
                     return true;
                 }
                 return false;
@@ -326,7 +346,14 @@ public class BlockInfusionWorkbench extends BlockContainer {
             case 3: {
                 tileEntity = world.getTileEntity(x, y, z - 1);
                 if (tileEntity != null && tileEntity instanceof TileInfusionWorkbench) {
-                    player.openGui((Object) Thaumcraft.instance, 14, world, x, y, z - 1);
+                    player.openGui(
+                        ClassicCasting.INSTANCE,
+                        GuiType.INFUSION_WORKBENCH.ordinal(),
+                        world,
+                        x,
+                        y,
+                        z - 1
+                    );
                     return true;
                 }
                 return false;
@@ -335,7 +362,12 @@ public class BlockInfusionWorkbench extends BlockContainer {
                 tileEntity = world.getTileEntity(x - 1, y, z - 1);
                 if (tileEntity != null && tileEntity instanceof TileInfusionWorkbench) {
                     player.openGui(
-                        (Object) Thaumcraft.instance, 14, world, x - 1, y, z - 1
+                        ClassicCasting.INSTANCE,
+                        GuiType.INFUSION_WORKBENCH.ordinal(),
+                        world,
+                        x - 1,
+                        y,
+                        z - 1
                     );
                     return true;
                 }

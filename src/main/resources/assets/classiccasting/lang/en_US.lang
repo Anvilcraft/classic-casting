@@ -18,3 +18,4 @@ item.classiccasting:wandTrade.name=Wand of Equal Trade
 # ---- BLOCKS ----
 
 tile.classiccasting:alembic.name=Arcane Alembic
+tile.classiccasting:infusionWorkbench.name=Arcane Stone
