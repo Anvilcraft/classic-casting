@@ -5,11 +5,16 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.anvilcraft.classiccasting.gui.GuiInfusionWorkbench;
 import net.anvilcraft.classiccasting.render.BlockAlembicRenderer;
+import net.anvilcraft.classiccasting.render.BlockCrystalRenderer;
 import net.anvilcraft.classiccasting.render.BlockInfusionWorkbenchRenderer;
 import net.anvilcraft.classiccasting.render.ItemAuraCompassRenderer;
 import net.anvilcraft.classiccasting.render.TileAlembicRenderer;
+import net.anvilcraft.classiccasting.render.TileCrystalCapacitorRenderer;
+import net.anvilcraft.classiccasting.render.TileCrystalCoreRenderer;
 import net.anvilcraft.classiccasting.render.TileInfusionWorkbenchRenderer;
 import net.anvilcraft.classiccasting.tiles.TileAlembic;
+import net.anvilcraft.classiccasting.tiles.TileCrystalCapacitor;
+import net.anvilcraft.classiccasting.tiles.TileCrystalCore;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -24,6 +29,9 @@ public class ClientProxy extends CommonProxy {
 
         BlockAlembicRenderer.RI = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new BlockAlembicRenderer());
+
+        BlockCrystalRenderer.RI = RenderingRegistry.getNextAvailableRenderId();
+        RenderingRegistry.registerBlockHandler(new BlockCrystalRenderer());
 
         BlockInfusionWorkbenchRenderer.RI = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new BlockInfusionWorkbenchRenderer());
@@ -42,6 +50,14 @@ public class ClientProxy extends CommonProxy {
     public void registerTileEntities() {
         ClientRegistry.registerTileEntity(
             TileAlembic.class, "alembic", new TileAlembicRenderer()
+        );
+        ClientRegistry.registerTileEntity(
+            TileCrystalCapacitor.class,
+            "crystalCapacitor",
+            new TileCrystalCapacitorRenderer()
+        );
+        ClientRegistry.registerTileEntity(
+            TileCrystalCore.class, "crystalCore", new TileCrystalCoreRenderer()
         );
         ClientRegistry.registerTileEntity(
             TileInfusionWorkbench.class,

@@ -147,7 +147,7 @@ public class ItemWandLightning extends ItemWandBasic {
         if (((Entity) p).worldObj.isRemote) {
             if (zapped) {
                 final MovingObjectPosition mop
-                    = Utils.getTargetBlock(((Entity) p).worldObj, p, false);
+                    = Utils.getTargetBlock(((Entity) p).worldObj, p, false, 10.0f);
                 final Vec3 v = p.getLook(2.0f);
                 double px = ((Entity) p).posX + v.xCoord * 10.0;
                 double py = ((Entity) p).posY + v.yCoord * 10.0;

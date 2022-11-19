@@ -3,12 +3,13 @@ package net.anvilcraft.classiccasting;
 import cpw.mods.fml.common.network.NetworkRegistry.TargetPoint;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import dev.tilera.auracore.api.IWand;
+import net.anvilcraft.classiccasting.tiles.TileCrystalCore;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagShort;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.world.World;
 import thaumcraft.api.IVisDiscountGear;
@@ -266,5 +267,62 @@ public class WandManager {
             && world.getBlockMetadata(x, y, z + 1) == 0
             && world.getBlock(x + 1, y, z + 1) == CCBlocks.infusionWorkbench
             && world.getBlockMetadata(x + 1, y, z + 1) == 0;
+    }
+
+    public static boolean createNodeMagnet(
+        final ItemStack itemstack,
+        final EntityPlayer player,
+        final World world,
+        final int x,
+        final int y,
+        final int z
+    ) {
+        for (int xx = x - 2; xx <= x; ++xx) {
+            for (int yy = y - 2; yy <= y; ++yy) {
+                int zz = z - 2;
+                while (zz <= z) {
+                    final TileEntity te = world.getTileEntity(xx + 1, yy + 2, zz + 1);
+                    if (fitNodeMagnet(world, xx, yy, zz) && te != null
+                        && te instanceof TileCrystalCore && !((TileCrystalCore) te).active
+                        && spendCharge(world, itemstack, player, 300)) {
+                        if (!world.isRemote) {
+                            ((TileCrystalCore) te).activate();
+                            return true;
+                        }
+                        return false;
+                    } else {
+                        ++zz;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean
+    fitNodeMagnet(final World world, final int x, final int y, final int z) {
+        final Block bo = ConfigBlocks.blockCosmeticSolid;
+        final Block bc = CCBlocks.crystal;
+        final Block ba = Blocks.air;
+        final Block[][][] blueprintBI
+            = { { { ba, ba, ba }, { ba, bc, ba }, { ba, ba, ba } },
+                { { bo, ba, bo }, { ba, ba, ba }, { bo, ba, bo } },
+                { { bo, ba, bo }, { ba, ba, ba }, { bo, ba, bo } } };
+        final int[][][] blueprintMD = { { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } },
+                                        { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } },
+                                        { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } } };
+        for (int yy = 0; yy < 3; ++yy) {
+            for (int xx = 0; xx < 3; ++xx) {
+                for (int zz = 0; zz < 3; ++zz) {
+                    final Block block = world.getBlock(x + xx, y - yy + 2, z + zz);
+                    final int meta = world.getBlockMetadata(x + xx, y - yy + 2, z + zz);
+                    if (block != blueprintBI[yy][xx][zz]
+                        || meta != blueprintMD[yy][xx][zz]) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
     }
 }

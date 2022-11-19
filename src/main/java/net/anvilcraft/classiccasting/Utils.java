@@ -151,7 +151,7 @@ public class Utils {
     }
 
     public static MovingObjectPosition
-    getTargetBlock(final World world, final EntityPlayer player, final boolean par3) {
+    getTargetBlock(final World world, final EntityPlayer player, final boolean par3, float range) {
         final float var4 = 1.0f;
         final float var5 = ((Entity) player).prevRotationPitch
             + (((Entity) player).rotationPitch - ((Entity) player).prevRotationPitch)
@@ -172,8 +172,7 @@ public class Utils {
         final float var14 = MathHelper.sin(-var5 * 0.017453292f);
         final float var15 = var12 * var13;
         final float var16 = var11 * var13;
-        final double var17 = 10.0;
-        final Vec3 var18 = var10.addVector(var15 * var17, var14 * var17, var16 * var17);
+        final Vec3 var18 = var10.addVector(var15 * range, var14 * range, var16 * range);
         return world.rayTraceBlocks(var10, var18, par3);
     }
 

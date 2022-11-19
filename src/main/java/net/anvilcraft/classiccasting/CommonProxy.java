@@ -5,6 +5,8 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.anvilcraft.classiccasting.container.ContainerInfusionWorkbench;
 import net.anvilcraft.classiccasting.tiles.TileAlembic;
+import net.anvilcraft.classiccasting.tiles.TileCrystalCapacitor;
+import net.anvilcraft.classiccasting.tiles.TileCrystalCore;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
@@ -22,6 +24,8 @@ public class CommonProxy implements IGuiHandler {
 
     public void registerTileEntities() {
         GameRegistry.registerTileEntity(TileAlembic.class, "alembic");
+        GameRegistry.registerTileEntity(TileCrystalCapacitor.class, "crystalCapacitor");
+        GameRegistry.registerTileEntity(TileCrystalCore.class, "crystalCore");
         GameRegistry.registerTileEntity(TileInfusionWorkbench.class, "infusionWorkbench");
     }
 

@@ -3,9 +3,12 @@ package net.anvilcraft.classiccasting;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
+import dev.tilera.auracore.AuraCore;
+import dev.tilera.auracore.api.CrystalColors;
 import net.anvilcraft.classiccasting.items.wands.ItemHellrod;
 import net.anvilcraft.classiccasting.items.wands.ItemWandCasting;
 import net.anvilcraft.classiccasting.items.wands.ItemWandTrade;
+import net.anvilcraft.classiccasting.tiles.TileCrystalCapacitor;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
@@ -13,7 +16,9 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.client.lib.UtilsFX;
@@ -35,6 +40,7 @@ public class GuiTicker {
                 = (EntityPlayer) Minecraft.getMinecraft().renderViewEntity;
             final long time = System.currentTimeMillis();
             if (player != null && mc.inGameHasFocus && Minecraft.isGuiEnabled()) {
+                this.renderCrystalCapacitorChargeHud(player);
                 if (player.inventory.getCurrentItem() != null) {
                     if (player.inventory.getCurrentItem().getItem()
                             instanceof ItemWandTrade) {
@@ -222,6 +228,51 @@ public class GuiTicker {
         GL11.glScalef(1.0f, 1.0f, 1.0f);
         GL11.glPopMatrix();
         GL11.glPopMatrix();
+    }
+
+    private void renderCrystalCapacitorChargeHud(EntityPlayer pl) {
+        Minecraft mc = Minecraft.getMinecraft();
+        if (!dev.tilera.auracore.helper.Utils.hasGoggles(pl))
+            return;
+
+        MovingObjectPosition mop = Utils.getTargetBlock(pl.worldObj, pl, false, 3.0f);
+        if (mop == null || mop.typeOfHit != MovingObjectPosition.MovingObjectType.BLOCK)
+            return;
+
+        TileEntity te = pl.worldObj.getTileEntity(mop.blockX, mop.blockY, mop.blockZ);
+        if (!(te instanceof TileCrystalCapacitor))
+            return;
+
+        int storedVis = ((TileCrystalCapacitor) te).storedVis;
+        int maxVis = ((TileCrystalCapacitor) te).maxVis;
+
+        String top_s = storedVis + " Vis";
+        String bot_s = Math.round(maxVis == 0 ? 0 : ((float)storedVis / (float)maxVis) * 100.0) + "%";
+
+        int textwidth = Math.max(
+            mc.fontRenderer.getStringWidth(top_s), mc.fontRenderer.getStringWidth(bot_s)
+        );
+
+        final ScaledResolution res
+            = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        final int width = res.getScaledWidth();
+        final int height = res.getScaledHeight();
+
+        GL11.glTranslatef((width / 2), (height / 2) + 16, 0.0f);
+        mc.renderEngine.bindTexture(
+            new ResourceLocation("auracore", "textures/misc/particles.png")
+        );
+        final int px = 32 * (mc.thePlayer.ticksExisted % 16);
+        final int py = 32 * (mc.thePlayer.ticksExisted % 32 / 16);
+        GL11.glScalef(2.0f, 2.0f, 1.0f);
+        UtilsFX.drawTexturedQuad(
+            -16, -16 + (mc.fontRenderer.FONT_HEIGHT / 2), px, 96 + py, 32, 32, -90.0
+        );
+        GL11.glScalef(0.5f, 0.5f, 1.0f);
+        mc.fontRenderer.drawString(top_s, -(textwidth / 2), 0, CrystalColors.colors[7]);
+        mc.fontRenderer.drawString(
+            bot_s, -(textwidth / 2), mc.fontRenderer.FONT_HEIGHT, CrystalColors.colors[7]
+        );
     }
 
     private void renderCastingWandHud(

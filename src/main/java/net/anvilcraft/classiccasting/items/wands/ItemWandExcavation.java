@@ -127,7 +127,7 @@ public class ItemWandExcavation extends ItemWandBasic {
             ItemWandExcavation.lastZ.put(pp, 0);
         }
         final MovingObjectPosition mop
-            = Utils.getTargetBlock(((Entity) p).worldObj, p, false);
+            = Utils.getTargetBlock(((Entity) p).worldObj, p, false, 10.0f);
         final Vec3 v = p.getLookVec();
         double tx = ((Entity) p).posX + v.xCoord * 10.0;
         double ty = ((Entity) p).posY + v.yCoord * 10.0;
