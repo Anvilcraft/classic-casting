@@ -6,12 +6,14 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import net.anvilcraft.classiccasting.gui.GuiInfusionWorkbench;
 import net.anvilcraft.classiccasting.render.BlockAlembicRenderer;
 import net.anvilcraft.classiccasting.render.BlockInfusionWorkbenchRenderer;
+import net.anvilcraft.classiccasting.render.ItemAuraCompassRenderer;
 import net.anvilcraft.classiccasting.render.TileAlembicRenderer;
 import net.anvilcraft.classiccasting.render.TileInfusionWorkbenchRenderer;
 import net.anvilcraft.classiccasting.tiles.TileAlembic;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
 
 public class ClientProxy extends CommonProxy {
     @Override
@@ -25,6 +27,15 @@ public class ClientProxy extends CommonProxy {
 
         BlockInfusionWorkbenchRenderer.RI = RenderingRegistry.getNextAvailableRenderId();
         RenderingRegistry.registerBlockHandler(new BlockInfusionWorkbenchRenderer());
+    }
+
+    @Override
+    public void init() {
+        super.init();
+
+        MinecraftForgeClient.registerItemRenderer(
+            CCItems.auraCompass, new ItemAuraCompassRenderer()
+        );
     }
 
     @Override

@@ -1,7 +1,8 @@
-# ---- ITEMS ----
-
 itemGroup.classiccasting=Classic Casting
 
+# ---- ITEMS ----
+
+item.classiccasting:auraCompass.name=Aura Compass
 item.classiccasting:portableHole.name=Portable Hole
 
 item.classiccasting:wandCastingApprentice.name=Wand of the Apprentice

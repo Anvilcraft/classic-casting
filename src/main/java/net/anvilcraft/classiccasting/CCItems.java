@@ -1,6 +1,7 @@
 package net.anvilcraft.classiccasting;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.anvilcraft.classiccasting.items.ItemAuraCompass;
 import net.anvilcraft.classiccasting.items.ItemPortableHole;
 import net.anvilcraft.classiccasting.items.wands.ItemHellrod;
 import net.anvilcraft.classiccasting.items.wands.ItemWandCastingAdept;
@@ -15,6 +16,7 @@ import net.minecraft.item.Item;
 
 public class CCItems {
     public static Item portableHole;
+    public static Item auraCompass;
 
     public static Item wandCastingApprentice;
     public static Item wandCastingAdept;
@@ -29,6 +31,7 @@ public class CCItems {
 
     public static void init() {
         portableHole = new ItemPortableHole();
+        auraCompass = new ItemAuraCompass();
 
         wandCastingApprentice = new ItemWandCastingApprentice();
         wandCastingAdept = new ItemWandCastingAdept();
@@ -42,6 +45,7 @@ public class CCItems {
         wandTrade = new ItemWandTrade();
 
         GameRegistry.registerItem(portableHole, "portableHole");
+        GameRegistry.registerItem(auraCompass, "auraCompass");
 
         GameRegistry.registerItem(wandCastingApprentice, "wandCastingApprentice");
         GameRegistry.registerItem(wandCastingAdept, "wandCastingAdept");

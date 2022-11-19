@@ -37,5 +37,6 @@ public class ClassicCasting {
     @Mod.EventHandler
     public void init(FMLInitializationEvent ev) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+        proxy.init();
     }
 }

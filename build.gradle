@@ -55,6 +55,12 @@ processResources {
     }
 }
 
+jar {
+    manifest {
+        attributes "FMLAT": "classiccasting_at.cfg"
+    }
+}
+
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'

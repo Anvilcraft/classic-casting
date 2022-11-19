@@ -14,6 +14,8 @@ public class CommonProxy implements IGuiHandler {
         FMLCommonHandler.instance().bus().register(new WorldTicker());
     }
 
+    public void init() {}
+
     public void alembicSpill(TileAlembic a) {
         // TODO
     }
