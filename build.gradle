@@ -24,14 +24,14 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 version = "0.1.0"
-group= "net.anvilcraft"
+group = "net.anvilcraft"
 archivesBaseName = "classic-casting"
 
 minecraft {
     version = "1.7.10-10.13.4.1614-1.7.10"
     runDir = "run"
 
-    replaceIn "dev/tilera/classiccasting/ClassicCasting.java"
+    replaceIn "net/anvilcraft/classiccasting/ClassicCasting.java"
     replace "@VERSION@", project.version
 }
 

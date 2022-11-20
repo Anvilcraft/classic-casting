@@ -1,5 +1,6 @@
 package net.anvilcraft.classiccasting.tiles;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import dev.tilera.auracore.api.AuraNode;
 import dev.tilera.auracore.aura.AuraManager;
 import dev.tilera.auracore.client.AuraManagerClient;
@@ -135,7 +136,10 @@ public class TileCrystalCore extends TileEntity {
                     }
                 }
             }
-            if (this.active && this.nodeKey > -1 && this.speed > 0.9
+            if (dev.tilera.auracore.helper.Utils.hasGoggles(
+                    FMLClientHandler.instance().getClientPlayerEntity()
+                )
+                && this.active && this.nodeKey > -1 && this.speed > 0.9
                 && AuraManagerClient.auraClientMovementList.get(this.nodeKey) != null
                 && this.count % 20 == 0) {
                 final AuraManagerClient.NodeRenderInfo nri

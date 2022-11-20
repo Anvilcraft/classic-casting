@@ -3,7 +3,6 @@ package net.anvilcraft.classiccasting;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.RenderTickEvent;
-import dev.tilera.auracore.AuraCore;
 import dev.tilera.auracore.api.CrystalColors;
 import net.anvilcraft.classiccasting.items.wands.ItemHellrod;
 import net.anvilcraft.classiccasting.items.wands.ItemWandCasting;
@@ -258,6 +257,7 @@ public class GuiTicker {
         final int width = res.getScaledWidth();
         final int height = res.getScaledHeight();
 
+        GL11.glPushMatrix();
         GL11.glTranslatef((width / 2), (height / 2) + 16, 0.0f);
         mc.renderEngine.bindTexture(
             new ResourceLocation("auracore", "textures/misc/particles.png")
@@ -273,6 +273,7 @@ public class GuiTicker {
         mc.fontRenderer.drawString(
             bot_s, -(textwidth / 2), mc.fontRenderer.FONT_HEIGHT, CrystalColors.colors[7]
         );
+        GL11.glPopMatrix();
     }
 
     private void renderCastingWandHud(

@@ -3,10 +3,12 @@ package net.anvilcraft.classiccasting;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import net.anvilcraft.classiccasting.entities.EntityFrostShard;
 import net.anvilcraft.classiccasting.gui.GuiInfusionWorkbench;
 import net.anvilcraft.classiccasting.render.BlockAlembicRenderer;
 import net.anvilcraft.classiccasting.render.BlockCrystalRenderer;
 import net.anvilcraft.classiccasting.render.BlockInfusionWorkbenchRenderer;
+import net.anvilcraft.classiccasting.render.EntityFrostShardRenderer;
 import net.anvilcraft.classiccasting.render.ItemAuraCompassRenderer;
 import net.anvilcraft.classiccasting.render.TileAlembicRenderer;
 import net.anvilcraft.classiccasting.render.TileCrystalCapacitorRenderer;
@@ -43,6 +45,10 @@ public class ClientProxy extends CommonProxy {
 
         MinecraftForgeClient.registerItemRenderer(
             CCItems.auraCompass, new ItemAuraCompassRenderer()
+        );
+
+        RenderingRegistry.registerEntityRenderingHandler(
+            EntityFrostShard.class, new EntityFrostShardRenderer()
         );
     }
 

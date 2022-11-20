@@ -1,0 +1,21 @@
+[
+    {
+        "modid": "classiccasting",
+        "name": "Classic Casting",
+        "description": "Der klassische Carsten!",
+        "version": "${version}",
+        "mcversion": "${mcversion}",
+        "authorList": [
+            "LordMZTE",
+            "nicht tilera lol"
+        ],
+        "requiredMods": [
+            "auracore",
+            "Thaumcraft"
+        ],
+        "dependencies": [
+            "auracore",
+            "Thaumcraft"
+        ]
+    }
+]

@@ -18,7 +18,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import dev.tilera.auracore.api.CrystalColors;
-import thaumcraft.common.blocks.BlockCustomOreItem;
 
 public class TileCrystalCoreRenderer extends TileEntitySpecialRenderer {
     private ModelCrystal model;
@@ -99,7 +98,7 @@ public class TileCrystalCoreRenderer extends TileEntitySpecialRenderer {
             if (col > 5) {
                 col = 1;
             }
-            final int color = CrystalColors.colors[col];
+            final int color = CrystalColors.colors[col == 5 ? 7 : col];
             final float angle1
                 = (tco.active ? (f * tco.speed) : 0.0f) + tco.rotation + 18 * a;
             final float angle2 = (float) (30 * (1 + a % 5));

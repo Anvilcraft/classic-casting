@@ -5,12 +5,14 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
+import net.anvilcraft.classiccasting.entities.EntityFrostShard;
 
 @Mod(
     modid = "classiccasting",
     name = "Classic Casting",
     version = "@VERSION@",
-    dependencies = "required-after:Thaumcraft"
+    dependencies = "required-after:Thaumcraft;required-after:auracore"
 )
 public class ClassicCasting {
     @Mod.Instance
@@ -37,6 +39,12 @@ public class ClassicCasting {
     @Mod.EventHandler
     public void init(FMLInitializationEvent ev) {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, proxy);
+
+        int entId = 0;
+        EntityRegistry.registerModEntity(
+            EntityFrostShard.class, "frostShard", entId++, this, 64, 20, true
+        );
+
         proxy.init();
     }
 }
