@@ -2,6 +2,7 @@ package net.anvilcraft.classiccasting.container;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import dev.tilera.auracore.api.crafting.IInfusionRecipe;
+import dev.tilera.auracore.crafting.AuracoreCraftingManager;
 import net.anvilcraft.classiccasting.WandManager;
 import net.anvilcraft.classiccasting.recipes.InfusionCraftingManager;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
@@ -14,6 +15,8 @@ import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.aspects.IAspectSource;
+import thaumcraft.api.crafting.IArcaneRecipe;
+import thaumcraft.common.tiles.TileMagicWorkbench;
 
 public class SlotCraftingInfusionWorkbench extends SlotCrafting {
     private final IInventory craftMatrix;
@@ -40,10 +43,10 @@ public class SlotCraftingInfusionWorkbench extends SlotCrafting {
         );
         this.onCrafting(par1ItemStack);
         int cost;
-        //int cost = ThaumcraftCraftingManager.findMatchingArcaneRecipeCost(
-        //    this.craftMatrix, this.thePlayer
-        //);
-        //if (cost == 0) {
+        TileMagicWorkbench bridge = AuracoreCraftingManager.createBridgeInventory(this.craftMatrix, 0, 9);
+        IArcaneRecipe recipe = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.thePlayer);
+        cost = AuracoreCraftingManager.getArcaneRecipeVisCost(recipe, bridge);
+        if (cost == 0) {
         IInfusionRecipe rec = InfusionCraftingManager.INSTANCE.findMatchingInfusionRecipe(
             this.craftMatrix, this.thePlayer
         );
@@ -60,12 +63,10 @@ public class SlotCraftingInfusionWorkbench extends SlotCrafting {
                     }
                 }
             }
-            //}
-            if (cost > 0) {
-                WandManager.spendCharge(
-                    this.craftMatrix.getStackInSlot(10), par1EntityPlayer, cost
-                );
             }
+        }
+        if (cost > 0) {
+            WandManager.spendCharge(this.craftMatrix.getStackInSlot(10), par1EntityPlayer, cost);
         }
         for (int var2 = 0; var2 < 9; ++var2) {
             final ItemStack var3 = this.craftMatrix.getStackInSlot(var2);
