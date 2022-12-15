@@ -3,8 +3,11 @@ package net.anvilcraft.classiccasting.items.wands;
 import java.util.List;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import dev.tilera.auracore.api.AuracoreRecipes;
 import dev.tilera.auracore.api.IWand;
+import dev.tilera.auracore.api.crafting.CrucibleRecipe;
 import dev.tilera.auracore.aura.AuraManager;
+import dev.tilera.auracore.crafting.AuracoreCraftingManager;
 import net.anvilcraft.classiccasting.CCBlocks;
 import net.anvilcraft.classiccasting.ClassicCastingTab;
 import net.anvilcraft.classiccasting.WandManager;
@@ -362,19 +365,18 @@ public abstract class ItemWandCasting extends Item implements IWand {
                 tile2.spillRemnants();
                 return true;
             }
-            // TODO: worry about this when tilera implements the other recipe handler
-            // thingy
-            //if (WandManager.spendCharge(
-            //        world,
-            //        itemstack,
-            //        player,
-            //        ThaumcraftCraftingManager.getCrucibleOutputCost(tile2)
-            //    )) {
-            //    ThaumcraftCraftingManager.performCrucibleCrafting(
-            //        world, player, tile2
-            //    );
-            //    return true;
-            //}
+            CrucibleRecipe recipe = AuracoreRecipes.getCrucibleRecipe(tile2.aspects, tile2);
+            if (WandManager.spendCharge(
+                    world,
+                    itemstack,
+                    player,
+                    AuracoreRecipes.getCrucibleOutputCost(tile2, recipe)
+                )) {
+                AuracoreCraftingManager.performCrucibleCrafting(
+                    player, tile2
+                );
+                return true;
+            }
         }
         return result;
     }
