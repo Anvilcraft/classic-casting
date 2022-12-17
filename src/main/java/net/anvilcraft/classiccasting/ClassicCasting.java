@@ -3,6 +3,7 @@ package net.anvilcraft.classiccasting;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -45,6 +46,13 @@ public class ClassicCasting {
             EntityFrostShard.class, "frostShard", entId++, this, 64, 20, true
         );
 
+        Recipes.init();
+
         proxy.init();
+    }
+
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent ev) {
+        Research.init();
     }
 }

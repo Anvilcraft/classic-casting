@@ -316,7 +316,7 @@ public abstract class ItemWandCasting extends Item implements IWand {
         }
 
         if (bi == CCBlocks.infusionWorkbench
-            /*&& ResearchManager.isResearchComplete(player.getDisplayName(), "MAGBLOCK")*/) {
+            && ResearchManager.isResearchComplete(player.getDisplayName(), "MAGBLOCKS")) {
             result
                 = WandManager.createInfusionWorkbench(itemstack, player, world, x, y, z);
         }
