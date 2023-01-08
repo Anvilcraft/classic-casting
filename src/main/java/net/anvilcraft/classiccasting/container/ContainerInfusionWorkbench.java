@@ -4,7 +4,6 @@ import dev.tilera.auracore.api.IWand;
 import dev.tilera.auracore.api.crafting.IInfusionRecipe;
 import dev.tilera.auracore.crafting.AuracoreCraftingManager;
 import net.anvilcraft.classiccasting.WandManager;
-import net.anvilcraft.classiccasting.recipes.InfusionCraftingManager;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -81,11 +80,10 @@ public class ContainerInfusionWorkbench extends Container {
                 ic, this.tileEntity.getWorldObj()
             )
         );
-
+        TileMagicWorkbench bridge = AuracoreCraftingManager.createBridgeInventory(this.tileEntity, 0, 9);
         if (this.tileEntity.getStackInSlot(9) == null
             && this.tileEntity.getStackInSlot(10) != null
             && this.tileEntity.getStackInSlot(10).getItem() instanceof IWand) {
-                TileMagicWorkbench bridge = AuracoreCraftingManager.createBridgeInventory(this.tileEntity, 0, 9);
                 IArcaneRecipe recipe = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.ip.player);
                 if (recipe != null && WandManager.hasCharge(this.tileEntity.getStackInSlot(10), this.ip.player, AuracoreCraftingManager.getArcaneRecipeVisCost(recipe, bridge))) {
                     this.tileEntity.setInventorySlotContentsSoftly(
@@ -98,8 +96,8 @@ public class ContainerInfusionWorkbench extends Container {
         if (this.tileEntity.getStackInSlot(9) == null
             && this.tileEntity.getStackInSlot(10) != null) {
             IInfusionRecipe rec
-                = InfusionCraftingManager.INSTANCE.findMatchingInfusionRecipe(
-                    this.tileEntity, this.ip.player
+                = AuracoreCraftingManager.findMatchingInfusionRecipe(
+                    bridge, this.ip.player
                 );
 
             if (rec != null

@@ -4,9 +4,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import dev.tilera.auracore.api.IWand;
 import dev.tilera.auracore.api.crafting.IInfusionRecipe;
+import dev.tilera.auracore.crafting.AuracoreCraftingManager;
 import net.anvilcraft.classiccasting.WandManager;
 import net.anvilcraft.classiccasting.container.ContainerInfusionWorkbench;
-import net.anvilcraft.classiccasting.recipes.InfusionCraftingManager;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.RenderHelper;
@@ -18,8 +18,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
+import thaumcraft.api.crafting.IArcaneRecipe;
 import thaumcraft.client.lib.UtilsFX;
 import thaumcraft.codechicken.lib.math.MathHelper;
+import thaumcraft.common.tiles.TileMagicWorkbench;
 
 @SideOnly(Side.CLIENT)
 public class GuiInfusionWorkbench extends GuiContainer {
@@ -85,17 +87,14 @@ public class GuiInfusionWorkbench extends GuiContainer {
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
         GL11.glDisable(3042);
         ItemStack result = null;
-        // TODO: arcane crafting
-        //if (ThaumcraftCraftingManager.findMatchingArcaneRecipe(
-        //        (IInventory) this.tileEntity, this.ip.player
-        //    )
-        //    != null) {
-        //    result = ThaumcraftCraftingManager.findMatchingArcaneRecipe(
-        //        (IInventory) this.tileEntity, this.ip.player
-        //    );
-        //} else
-        IInfusionRecipe rec = InfusionCraftingManager.INSTANCE.findMatchingInfusionRecipe(
-            this.tileEntity, this.ip.player
+        TileMagicWorkbench bridge = AuracoreCraftingManager.createBridgeInventory(this.tileEntity, 0, 9);
+        IArcaneRecipe arcaneRecipe = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.ip.player);
+        IInfusionRecipe rec = null;
+        if (arcaneRecipe != null) {
+            result = arcaneRecipe.getCraftingResult(bridge);
+        } else {
+        rec = AuracoreCraftingManager.findMatchingInfusionRecipe(
+            bridge, this.ip.player
         );
         if (rec != null) {
             result = rec.getRecipeOutput();
@@ -124,6 +123,7 @@ public class GuiInfusionWorkbench extends GuiContainer {
                 }
             }
         }
+        }
         if (this.tileEntity.getStackInSlot(10) != null) {
             final int charge = ((IWand)this.tileEntity.getStackInSlot(10).getItem()).getVis(this.tileEntity.getStackInSlot(10));
             if (charge > 0) {
@@ -139,13 +139,11 @@ public class GuiInfusionWorkbench extends GuiContainer {
             if (result != null) {
                 final int discount
                     = 100 - Math.min(50, WandManager.getTotalVisDiscount(this.ip.player));
-                //int cost1 = ThaumcraftCraftingManager.findMatchingArcaneRecipeCost(
-                //    this.tileEntity, this.ip.player
-                //);
-                //cost1 = Math.round(cost1 * (discount / 100.0f));
-                int cost2 = rec.getCost();
+                int cost1 = arcaneRecipe != null ? AuracoreCraftingManager.getArcaneRecipeVisCost(arcaneRecipe, bridge) : 0;
+                cost1 = Math.round(cost1 * (discount / 100.0f));
+                int cost2 = rec != null ? rec.getCost() : 0;
                 cost2 = Math.round(cost2 * (discount / 100.0f));
-                if (/*charge < cost1 ||*/ charge < cost2) {
+                if (charge < cost1 || charge < cost2) {
                     GL11.glPushMatrix();
                     RenderHelper.enableGUIStandardItemLighting();
                     GL11.glDisable(2896);
@@ -174,10 +172,10 @@ public class GuiInfusionWorkbench extends GuiContainer {
                     GL11.glTranslatef((float) (var5 + 140), (float) (var6 + 85), 0.0f);
                     GL11.glScalef(0.5f, 0.5f, 0.0f);
                     String text2 = "Insufficient charge";
-                    if (/*cost1 > ((ItemWandCasting) this.tileEntity.getStackInSlot(10)
+                    if (cost1 > ((IWand) this.tileEntity.getStackInSlot(10)
                                      .getItem())
-                                    .getMaxVis()
-                        ||*/ cost2 > ((IWand) this.tileEntity.getStackInSlot(10)
+                                    .getMaxVis(this.tileEntity.getStackInSlot(10))
+                        || cost2 > ((IWand) this.tileEntity.getStackInSlot(10)
                                         .getItem())
                                        .getMaxVis(this.tileEntity.getStackInSlot(10))) {
                         text2 = "This wand is too weak";
@@ -187,12 +185,11 @@ public class GuiInfusionWorkbench extends GuiContainer {
                     GL11.glScalef(1.0f, 1.0f, 1.0f);
                     GL11.glPopMatrix();
                 }
-                if (/*cost1 > 0 ||*/ cost2 > 0) {
+                if (cost1 > 0 || cost2 > 0) {
                     GL11.glPushMatrix();
                     GL11.glTranslatef((float) (var5 + 140), (float) (var6 + 81), 0.0f);
                     GL11.glScalef(0.5f, 0.5f, 0.0f);
-                    //final String text2 = Math.max(cost1, cost2) + " vis";
-                    final String text2 = cost2 + " vis";
+                    final String text2 = Math.max(cost1, cost2) + " vis";
                     final int ll2 = this.fontRendererObj.getStringWidth(text2) / 2;
                     this.fontRendererObj.drawStringWithShadow(text2, -ll2, -64, 15658734);
                     GL11.glScalef(1.0f, 1.0f, 1.0f);

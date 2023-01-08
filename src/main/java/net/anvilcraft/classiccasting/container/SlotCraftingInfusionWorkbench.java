@@ -4,7 +4,6 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import dev.tilera.auracore.api.crafting.IInfusionRecipe;
 import dev.tilera.auracore.crafting.AuracoreCraftingManager;
 import net.anvilcraft.classiccasting.WandManager;
-import net.anvilcraft.classiccasting.recipes.InfusionCraftingManager;
 import net.anvilcraft.classiccasting.tiles.TileInfusionWorkbench;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -47,8 +46,8 @@ public class SlotCraftingInfusionWorkbench extends SlotCrafting {
         IArcaneRecipe recipe = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.thePlayer);
         cost = AuracoreCraftingManager.getArcaneRecipeVisCost(recipe, bridge);
         if (cost == 0) {
-        IInfusionRecipe rec = InfusionCraftingManager.INSTANCE.findMatchingInfusionRecipe(
-            this.craftMatrix, this.thePlayer
+        IInfusionRecipe rec = AuracoreCraftingManager.findMatchingInfusionRecipe(
+            bridge, this.thePlayer
         );
         if (rec != null) {
             cost = rec.getCost();
