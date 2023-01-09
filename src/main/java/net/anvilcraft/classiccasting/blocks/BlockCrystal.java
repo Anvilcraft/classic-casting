@@ -158,6 +158,7 @@ public class BlockCrystal extends BlockContainer {
             ret.add(new ItemStack(Items.nether_star));
             int total = 0;
             for (int t = 0; t < 5; ++t) {
+                t = t == 4 ? 7 : t;
                 final int q = 2 + world.rand.nextInt(3);
                 total += q;
                 for (int a = 0; a < q; ++a) {
@@ -165,7 +166,7 @@ public class BlockCrystal extends BlockContainer {
                 }
             }
             if (20 - total > 0) {
-                ret.add(new ItemStack(ConfigItems.itemShard, 20 - total, 5));
+                ret.add(new ItemStack(ConfigItems.itemShard, 20 - total, 8));
             }
             return ret;
         }
