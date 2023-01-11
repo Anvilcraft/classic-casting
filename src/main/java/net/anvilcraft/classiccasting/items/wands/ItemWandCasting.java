@@ -307,10 +307,9 @@ public abstract class ItemWandCasting extends Item implements IWand {
             result = WandManager.createArcaneFurnace(itemstack, player, world, x, y, z);
         }
         if ((bi == ConfigBlocks.blockCosmeticSolid || bi == CCBlocks.crystal)
-            // TODO: research
-            //&& ResearchManager.isResearchComplete(
-            //    player.getDisplayName(), "CRYSTALCORE"
-            //)
+            && ResearchManager.isResearchComplete(
+                player.getDisplayName(), "CRYSTALCORE"
+            )
         ) {
             result = WandManager.createNodeMagnet(itemstack, player, world, x, y, z);
         }
