@@ -25,17 +25,48 @@ tile.classiccasting:infusionWorkbench.name=Arcane Stone
 
 # ---- RESEARCH ----
 tc.research_category.CLASSICCASTING=Classic Casting
+
 tc.research_name.MAGBLOCKS=Magical Building Blocks
 tc.research_text.MAGBLOCKS=Putting it all together
 classiccasting.research_page.MAGBLOCKS.1=You have found a way to merge the strength of stone with the resiliency of Thaumium. The result is a block quite resistant to daily wear and tear.<BR> More importantly, these arcane stone blocks are perfectly suited for the creation of magical constructs and structures (including Beacon bases).<BR> The lattice of Thaumium that forms the core of this block allows it to be easily transformed into a myriad of configurations.<BR> You have also discovered a technique of engraving and enchanting wood allowing it to be used for similar purposes.
 classiccasting.research_page.MAGBLOCKS.2=By placing four Arcane Stone Blocks together (as shown on the right) and infusing them with vis with a wave of your wand, the stones will merge together into an Infusion Altar.<BR> The Infusion Altar can be used to perform any crafting a normal workbench and arcane worktable can. In addition it is able to infuse certain creations with mystical aspects allowing for the creation of objects of great magical power.<BR> To do this the Infusion Altar requires a source of aspects - a crucible is a good example of one such source. After placing the components in the Altar you should get an idea of what aspects are required to create the object.<BR> [continued]
 classiccasting.research_page.MAGBLOCKS.3=If there is a source of those aspects nearby you should be able to craft the item. It should be noted that a single type of aspect can only come from a single source - the Infusion Altar cannot draw that aspect from multiple sources to reach the required amount. Different aspects can come from different sources though.<BR> If the source is a crucible you should note that once the aspects are drawn from it, any remaining aspects might be spilled into the aura as Flux.<BR> (Shift-clicking to create multiples of an item will only cause the spillage at the end of the creation process, allowing you to craft multiple items in one go.)
+
 tc.research_name.CRYSTALCORE=Basic Aura Manipulation
 tc.research_text.CRYSTALCORE=Magic at your beck and call
 classiccasting.research_page.CRYSTALCORE.1=You have discovered the secret to moving aura nodes. Unfortunately it has proven to be quite difficult and expensive.<BR> You first need to create a Crystal Core. This fragile, but magicaly charged structure is capable of bending the aura around it. For now you will simply use it to draw nodes towards it.<BR> Crystal cores are very fragile and you must make sure to place them in the correct spot the first time. When broken they shatter into their component parts and need to be rebuilt.
 classiccasting.research_page.CRYSTALCORE.2=Once you have constructed a crystal core, you need to place it amidst four Obsidian Totems. You have been unable to duplicate the construction of these arcane structures, but they can be found dotted across the countryside. It is unknown who (or what) placed them, but they are usually found near an aura node.<BR> Once the crystal core and totems have been placed a wave of your wand is all that is needed to activate the core. It will slowly draw the closest node within 24 blocks to itself with the end position of the node being the same as where you placed the crystal core.<BR> While the node is being moved it will slowly lose vis and flux will steadily build. The vis loss is not permanent.
+
 tc.research_name.BASICFLUX=Basic Flux Research
 tc.research_text.BASICFLUX=There must be ways to control it
 classiccasting.research_page.BASICFLUX.1=You have taken your first steps towards understanding and managing Flux. Your research has led you to two practical applications: the Flux Filter and the Arcane Alembic.<BR> Flux Filters are crafted using gold and specially treated silverwood. It utilizes silverwood's natural ability to resist flux as a means of directing its flow and rendering it partially controllable.<BR> The flux filter serves no purpose by itself, but it forms a vital component of more complex machines, like the Arcane Alembic.
 classiccasting.research_page.BASICFLUX.2=An Arcane Alembic needs to be attached to the side of a crucible. Any surplus mystical energy left over from working with the crucible would normally transform into flux and enter the aura, but the arcane alembic is capable of capturing some of the escaping energy and storing it.<BR> An arcane alembic can only store a single type of aspected energy at a time, and its storage capacity is severely limited. The energy trapped in the alembic can be siphoned off using glass phials. The resulting phials of aspected Essentia can then be reused for other tasks. The alembic can also directly act as a source of infusion crafting.<BR> [continued]
 classiccasting.research_page.BASICFLUX.3=Using a wand on a filled alembic will also allow you to return its stored essentia to the crucible as long as its filled and boiling.<BR> Clicking with a wand while sneaking will spill the contents of the alembic into the aura.
+
+tc.research_name.CRYSTALCAPACITOR=Crystal Capacitor
+tc.research_text.CRYSTALCAPACITOR=Storing vis for a rainy day.
+classiccasting.research_page.CRYSTALCORE=You have found of a way of restoring the vis absorption properties to dull crystals. By combining eight of these crystals you can create a crystal capacitor that functions in much the same way as infused ore.<BR><BR>Each crystal capacitor can store up to 100 vis and will slowly absorb or release vis if nearby nodes are above or below their baseline levels. It can only absorb or release 1 vis every 5 seconds.<BR><BR>The capacitor can be safely moved without losing any stored vis.
+
+tc.research_name.UNIFIEDTHAUMICFIELDTHEORY=Unified Thaumic Field Theory
+tc.research_text.UNIFIEDTHAUMICFIELDTHEORY=All is becoming clear
+classiccasting.research_page.UNIFIEDTHAUMICFIELDTHEORY=You have formulated a theory on how the natural and elemental world interacts with the mystical. You finally have a grasp on how the Aura saturates everything and everyone.<BR><BR>Not only is this knowledge enlightening, it has some practical applications. The first such practical application is an improvement to your casting wand. You now know how to create a Wand of the Adept. <BR><BR>It is similar to the Wand of the Apprentice, except it is able to store much more vis thus allowing for larger and more complex feats of magic. It also recharges faster.
+
+tc.research_name.WANDFIRE=Wand of Fire
+tc.research_text.WANDFIRE=Light them up
+classiccasting.research_page.WANDFIRE=You have successfully adapted the enchantment on an apprentice wand. It is now capable of sending forth a cone of elemental fire, burning all in its wake.<BR><BR>However the wand has lost the ability to renew its charge and will eventually run out of energy and break.
+
+tc.research_name.WANDFROST=Wand of Frost
+tc.research_text.WANDFROST=Revenge is a dish best served cold
+classiccasting.research_page.WANDFROST=You have successfully adapted the enchantment on an apprentice wand. It is now capable of hurling chunks of ice. <BR><BR>The wand isn't particularly accurate, and the loose chunks of ice tends to bounce all over the place so take care not to use it near anything fragile. The ice chunks will also freeze any water source blocks they come into contact with.<BR><BR>The wand has lost the ability to renew its charge and will eventually run out of energy and break.
+
+tc.research_name.WANDTRADE=Wand of Equal Trade
+tc.research_text.WANDTRADE=This for That
+classiccasting.research_page.WANDTRADE=You have successfully adapted the enchantment on an apprentice wand. You can use it to trade dozens of blocks in the world with some you are carrying.<BR><BR>You must first choose the block you wish to change other blocks into by sneaking and right clicking on the desired block. When you then left-click on another block it will turn into the target block. Right clicking will transform a whole swathe of blocks.<BR><BR>You must be carrying enough target blocks, and the transformed blocks will replace them in your inventory. Only blocks with at least one face adjacent to open air or non-solid blocks will be transformed.
+
+tc.research_name.WANDEXCAVATE=Wand of Excavation
+tc.research_text.WANDEXCAVATE=Terra Terror
+classiccasting.research_page.WANDEXCAVATE=You have successfully adapted the enchantment on an apprentice wand. You have turned it into a tool capable of moving vast amounts of earth and stone with little effort. <BR><BR>Simply point it at what you want to excavate and the magic does the rest. Tougher materials take longer to mine, and anything other than earth, stone or similar materials will take much longer to mine.
+
+tc.research_name.WANDLIGHTNING=Wand of Lightning
+tc.research_text.WANDLIGHTNING=...very, very frightening
+classiccasting.research_page.WANDLIGHTNING=You have successfully adapted the enchantment on an apprentice wand. It is now capable of focusing elemental energy into bolts of lightning.<BR><BR>However the wand has lost the ability to renew its charge and will eventually run out of energy and break.

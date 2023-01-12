@@ -108,7 +108,13 @@ public class Research {
         new ResearchItem(
             "CRYSTALCORE",
             "CLASSICCASTING",
-            new AspectList(),
+            new AspectList()
+                .add(Aspect.MAGIC, 32)
+                .add(Aspects.CONTROL, 32)
+                .add(Aspect.EXCHANGE, 24)
+                .add(Aspects.FLUX, 16)
+                .add(Aspect.MOTION, 32)
+                .add(Aspect.VOID, 16),
             0,
             2,
             3,
@@ -120,6 +126,147 @@ public class Research {
                 new ResearchPage("classiccasting.research_page.CRYSTALCORE.2"),
                 new ResearchPage(magnetStructure)
             )
+            .registerResearchItem();
+
+        new ResearchItem(
+            "CRYSTALCAPACITOR",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.CRYSTAL, 24)
+                .add(Aspect.MAGIC, 32)
+                .add(Aspect.EXCHANGE, 24),
+            -2,
+            2,
+            1,
+            new ItemStack(CCBlocks.crystal, 1, 1)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.CRYSTALCORE"),
+                new ResearchPageInfusion(infusionRecipes.get("CrystalCapacitor"))
+            )
+            .setParents("CRYSTALCORE")
+            .registerResearchItem();
+
+        int utftCol = 3;
+        int utftRow = -2;
+
+        new ResearchItem(
+            "UNIFIEDTHAUMICFIELDTHEORY",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.MIND, 8)
+                .add(Aspects.FLUX, 8)
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.FIRE, 8)
+                .add(Aspect.AIR, 8)
+                .add(Aspect.EARTH, 8)
+                .add(Aspect.WATER, 8)
+                .add(Aspects.TIME, 4),
+            utftCol,
+            utftRow,
+            3,
+            new ResourceLocation(
+                "classiccasting", "textures/misc/unified_thaumic_field_theory.png"
+            )
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.UNIFIEDTHAUMICFIELDTHEORY"
+                ),
+                new ResearchPageInfusion(infusionRecipes.get("AdeptWand"))
+            )
+            .setSpecial()
+            .registerResearchItem();
+
+        new ResearchItem(
+            "WANDFIRE",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspects.DESTRUCTION, 8)
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.WEAPON, 8)
+                .add(Aspect.FIRE, 8),
+            utftCol + 1,
+            utftRow + 2,
+            2,
+            new ItemStack(CCItems.wandFire)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.WANDFIRE"),
+                new ResearchPageInfusion(infusionRecipes.get("WandFire"))
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY")
+            .registerResearchItem();
+
+        new ResearchItem(
+            "WANDFROST",
+            "CLASSICCASTING",
+            new AspectList().add(Aspect.COLD, 16).add(Aspect.WEAPON, 4),
+            utftCol + 1,
+            utftRow + 3,
+            2,
+            new ItemStack(CCItems.wandFrost)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.WANDFROST"),
+                new ResearchPageInfusion(infusionRecipes.get("WandFrost"))
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY")
+            .registerResearchItem();
+
+        new ResearchItem(
+            "WANDTRADE",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.EXCHANGE, 16)
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.TOOL, 8),
+            utftCol - 1,
+            utftRow + 4,
+            2,
+            new ItemStack(CCItems.wandTrade)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.WANDTRADE"),
+                new ResearchPageInfusion(infusionRecipes.get("WandTrade"))
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY")
+            .registerResearchItem();
+
+        new ResearchItem(
+            "WANDEXCAVATE",
+            "CLASSICCASTING",
+            new AspectList().add(Aspect.METAL, 16).add(Aspect.TOOL, 4),
+            utftCol - 1,
+            utftRow + 3,
+            2,
+            new ItemStack(CCItems.wandExcavation)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.WANDEXCAVATE"),
+                new ResearchPageInfusion(infusionRecipes.get("WandExcavate"))
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY")
+            .registerResearchItem();
+
+        new ResearchItem(
+            "WANDLIGHTNING",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspects.DESTRUCTION, 8)
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.WEAPON, 8)
+                // TODO: this used to be Aspect.POWER. is ENERGY correct?
+                .add(Aspect.ENERGY, 8),
+            utftCol + 1,
+            utftRow + 4,
+            2,
+            new ItemStack(CCItems.wandLightning)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.WANDLIGHTNING"),
+                new ResearchPageInfusion(infusionRecipes.get("wandLightning"))
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY")
             .registerResearchItem();
     }
 }

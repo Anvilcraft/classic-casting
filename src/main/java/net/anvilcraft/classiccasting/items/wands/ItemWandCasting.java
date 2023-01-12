@@ -365,7 +365,8 @@ public abstract class ItemWandCasting extends Item implements IWand {
             }
             CrucibleRecipe recipe
                 = AuracoreRecipes.getCrucibleRecipe(tile2.aspects, tile2);
-            if (WandManager.spendCharge(
+            if (recipe != null
+                && WandManager.spendCharge(
                     world,
                     itemstack,
                     player,
