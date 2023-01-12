@@ -61,7 +61,7 @@ public class TileCrystalCapacitor extends TileEntity {
                         );
                         break;
                     }
-                    if (nd.level < nd.baseLevel && this.storedVis> 0) {
+                    if (nd.level<nd.baseLevel&& this.storedVis> 0) {
                         AuraManager.queueNodeChanges(
                             nd.key, 1, 0, false, null, 0.0f, 0.0f, 0.0f
                         );

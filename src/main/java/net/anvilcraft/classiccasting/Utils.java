@@ -150,8 +150,9 @@ public class Utils {
         return pointedEntity;
     }
 
-    public static MovingObjectPosition
-    getTargetBlock(final World world, final EntityPlayer player, final boolean par3, float range) {
+    public static MovingObjectPosition getTargetBlock(
+        final World world, final EntityPlayer player, final boolean par3, float range
+    ) {
         final float var4 = 1.0f;
         final float var5 = ((Entity) player).prevRotationPitch
             + (((Entity) player).rotationPitch - ((Entity) player).prevRotationPitch)

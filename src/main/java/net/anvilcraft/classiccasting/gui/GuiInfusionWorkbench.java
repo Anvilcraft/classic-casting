@@ -87,45 +87,50 @@ public class GuiInfusionWorkbench extends GuiContainer {
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.ySize);
         GL11.glDisable(3042);
         ItemStack result = null;
-        TileMagicWorkbench bridge = AuracoreCraftingManager.createBridgeInventory(this.tileEntity, 0, 9);
-        IArcaneRecipe arcaneRecipe = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.ip.player);
+        TileMagicWorkbench bridge
+            = AuracoreCraftingManager.createBridgeInventory(this.tileEntity, 0, 9);
+        IArcaneRecipe arcaneRecipe
+            = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.ip.player);
         IInfusionRecipe rec = null;
         if (arcaneRecipe != null) {
             result = arcaneRecipe.getCraftingResult(bridge);
         } else {
-        rec = AuracoreCraftingManager.findMatchingInfusionRecipe(
-            bridge, this.ip.player
-        );
-        if (rec != null) {
-            result = rec.getRecipeOutput();
-            final AspectList reqs = rec.getAspects();
-            int count = 0;
-            if (reqs != null && reqs.size() > 0) {
-                for (final Aspect tag : reqs.getAspects()) {
-                    float op = 1.0f;
-                    if (this.tileEntity.foundAspects.getAmount(tag)
-                        < reqs.getAmount(tag)) {
-                        op = (float
-                             ) (MathHelper.sin(this.ip.player.ticksExisted - count * 10)
-                                / 8.0f)
-                                * 0.125f
-                            + 0.25f;
+            rec = AuracoreCraftingManager.findMatchingInfusionRecipe(
+                bridge, this.ip.player
+            );
+            if (rec != null) {
+                result = rec.getRecipeOutput();
+                final AspectList reqs = rec.getAspects();
+                int count = 0;
+                if (reqs != null && reqs.size() > 0) {
+                    for (final Aspect tag : reqs.getAspects()) {
+                        float op = 1.0f;
+                        if (this.tileEntity.foundAspects.getAmount(tag)
+                            < reqs.getAmount(tag)) {
+                            op = (float
+                                 ) (MathHelper.sin(
+                                        this.ip.player.ticksExisted - count * 10
+                                    )
+                                    / 8.0f)
+                                    * 0.125f
+                                + 0.25f;
+                        }
+                        UtilsFX.drawTag(
+                            var5 + 24 + 16 * count + (5 - reqs.size()) * 8,
+                            var6 + 72,
+                            tag,
+                            reqs.getAmount(tag),
+                            0,
+                            op
+                        );
+                        ++count;
                     }
-                    UtilsFX.drawTag(
-                        var5 + 24 + 16 * count + (5 - reqs.size()) * 8,
-                        var6 + 72,
-                        tag,
-                        reqs.getAmount(tag),
-                        0,
-                        op
-                    );
-                    ++count;
                 }
             }
         }
-        }
         if (this.tileEntity.getStackInSlot(10) != null) {
-            final int charge = ((IWand)this.tileEntity.getStackInSlot(10).getItem()).getVis(this.tileEntity.getStackInSlot(10));
+            final int charge = ((IWand) this.tileEntity.getStackInSlot(10).getItem())
+                                   .getVis(this.tileEntity.getStackInSlot(10));
             if (charge > 0) {
                 GL11.glPushMatrix();
                 GL11.glTranslatef((float) (var5 + 140), (float) (var6 + 85), 505.0f);
@@ -139,7 +144,9 @@ public class GuiInfusionWorkbench extends GuiContainer {
             if (result != null) {
                 final int discount
                     = 100 - Math.min(50, WandManager.getTotalVisDiscount(this.ip.player));
-                int cost1 = arcaneRecipe != null ? AuracoreCraftingManager.getArcaneRecipeVisCost(arcaneRecipe, bridge) : 0;
+                int cost1 = arcaneRecipe != null
+                    ? AuracoreCraftingManager.getArcaneRecipeVisCost(arcaneRecipe, bridge)
+                    : 0;
                 cost1 = Math.round(cost1 * (discount / 100.0f));
                 int cost2 = rec != null ? rec.getCost() : 0;
                 cost2 = Math.round(cost2 * (discount / 100.0f));
@@ -172,11 +179,9 @@ public class GuiInfusionWorkbench extends GuiContainer {
                     GL11.glTranslatef((float) (var5 + 140), (float) (var6 + 85), 0.0f);
                     GL11.glScalef(0.5f, 0.5f, 0.0f);
                     String text2 = "Insufficient charge";
-                    if (cost1 > ((IWand) this.tileEntity.getStackInSlot(10)
-                                     .getItem())
+                    if (cost1 > ((IWand) this.tileEntity.getStackInSlot(10).getItem())
                                     .getMaxVis(this.tileEntity.getStackInSlot(10))
-                        || cost2 > ((IWand) this.tileEntity.getStackInSlot(10)
-                                        .getItem())
+                        || cost2 > ((IWand) this.tileEntity.getStackInSlot(10).getItem())
                                        .getMaxVis(this.tileEntity.getStackInSlot(10))) {
                         text2 = "This wand is too weak";
                     }

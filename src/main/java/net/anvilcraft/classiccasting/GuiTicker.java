@@ -246,7 +246,9 @@ public class GuiTicker {
         int maxVis = ((TileCrystalCapacitor) te).maxVis;
 
         String top_s = storedVis + " Vis";
-        String bot_s = Math.round(maxVis == 0 ? 0 : ((float)storedVis / (float)maxVis) * 100.0) + "%";
+        String bot_s
+            = Math.round(maxVis == 0 ? 0 : ((float) storedVis / (float) maxVis) * 100.0)
+            + "%";
 
         int textwidth = Math.max(
             mc.fontRenderer.getStringWidth(top_s), mc.fontRenderer.getStringWidth(bot_s)

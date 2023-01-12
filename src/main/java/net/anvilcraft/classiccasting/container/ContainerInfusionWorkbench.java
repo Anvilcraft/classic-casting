@@ -80,25 +80,31 @@ public class ContainerInfusionWorkbench extends Container {
                 ic, this.tileEntity.getWorldObj()
             )
         );
-        TileMagicWorkbench bridge = AuracoreCraftingManager.createBridgeInventory(this.tileEntity, 0, 9);
+        TileMagicWorkbench bridge
+            = AuracoreCraftingManager.createBridgeInventory(this.tileEntity, 0, 9);
         if (this.tileEntity.getStackInSlot(9) == null
             && this.tileEntity.getStackInSlot(10) != null
             && this.tileEntity.getStackInSlot(10).getItem() instanceof IWand) {
-                IArcaneRecipe recipe = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.ip.player);
-                if (recipe != null && WandManager.hasCharge(this.tileEntity.getStackInSlot(10), this.ip.player, AuracoreCraftingManager.getArcaneRecipeVisCost(recipe, bridge))) {
-                    this.tileEntity.setInventorySlotContentsSoftly(
-                        9,
-                        recipe.getCraftingResult(bridge)
-                    );
-                }
+            IArcaneRecipe recipe = AuracoreCraftingManager.findMatchingArcaneRecipe(
+                bridge, this.ip.player
+            );
+            if (recipe != null
+                && WandManager.hasCharge(
+                    this.tileEntity.getStackInSlot(10),
+                    this.ip.player,
+                    AuracoreCraftingManager.getArcaneRecipeVisCost(recipe, bridge)
+                )) {
+                this.tileEntity.setInventorySlotContentsSoftly(
+                    9, recipe.getCraftingResult(bridge)
+                );
+            }
         }
 
         if (this.tileEntity.getStackInSlot(9) == null
             && this.tileEntity.getStackInSlot(10) != null) {
-            IInfusionRecipe rec
-                = AuracoreCraftingManager.findMatchingInfusionRecipe(
-                    bridge, this.ip.player
-                );
+            IInfusionRecipe rec = AuracoreCraftingManager.findMatchingInfusionRecipe(
+                bridge, this.ip.player
+            );
 
             if (rec != null
                 && WandManager.hasCharge(

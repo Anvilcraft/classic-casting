@@ -358,7 +358,8 @@ public class EntityFrostShard extends Entity implements IProjectile {
                     }
                     if (var8.entityHit.attackEntityFrom(var20, var19)) {
                         if (var8.entityHit instanceof EntityLivingBase) {
-                            final EntityLivingBase var21 = (EntityLivingBase) var8.entityHit;
+                            final EntityLivingBase var21
+                                = (EntityLivingBase) var8.entityHit;
                             if (this.knockbackStrength > 0) {
                                 final float var22 = MathHelper.sqrt_double(
                                     super.motionX * super.motionX

@@ -116,18 +116,10 @@ public class UtilsFX {
         tes.startDrawingQuads();
         tes.setBrightness(brightness);
         tes.setNormal(0.0F, 0.0F, 1.0F);
-        tes.addVertexWithUV(
-            0.0D, 0.0D, 0.0D, (double) p_78439_1_, (double) p_78439_4_
-        );
-        tes.addVertexWithUV(
-            1.0D, 0.0D, 0.0D, (double) p_78439_3_, (double) p_78439_4_
-        );
-        tes.addVertexWithUV(
-            1.0D, 1.0D, 0.0D, (double) p_78439_3_, (double) p_78439_2_
-        );
-        tes.addVertexWithUV(
-            0.0D, 1.0D, 0.0D, (double) p_78439_1_, (double) p_78439_2_
-        );
+        tes.addVertexWithUV(0.0D, 0.0D, 0.0D, (double) p_78439_1_, (double) p_78439_4_);
+        tes.addVertexWithUV(1.0D, 0.0D, 0.0D, (double) p_78439_3_, (double) p_78439_4_);
+        tes.addVertexWithUV(1.0D, 1.0D, 0.0D, (double) p_78439_3_, (double) p_78439_2_);
+        tes.addVertexWithUV(0.0D, 1.0D, 0.0D, (double) p_78439_1_, (double) p_78439_2_);
         tes.draw();
         tes.startDrawingQuads();
         tes.setBrightness(brightness);

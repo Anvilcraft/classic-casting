@@ -309,8 +309,7 @@ public abstract class ItemWandCasting extends Item implements IWand {
         if ((bi == ConfigBlocks.blockCosmeticSolid || bi == CCBlocks.crystal)
             && ResearchManager.isResearchComplete(
                 player.getDisplayName(), "CRYSTALCORE"
-            )
-        ) {
+            )) {
             result = WandManager.createNodeMagnet(itemstack, player, world, x, y, z);
         }
 
@@ -364,16 +363,15 @@ public abstract class ItemWandCasting extends Item implements IWand {
                 tile2.spillRemnants();
                 return true;
             }
-            CrucibleRecipe recipe = AuracoreRecipes.getCrucibleRecipe(tile2.aspects, tile2);
+            CrucibleRecipe recipe
+                = AuracoreRecipes.getCrucibleRecipe(tile2.aspects, tile2);
             if (WandManager.spendCharge(
                     world,
                     itemstack,
                     player,
                     AuracoreRecipes.getCrucibleOutputCost(tile2, recipe)
                 )) {
-                AuracoreCraftingManager.performCrucibleCrafting(
-                    player, tile2
-                );
+                AuracoreCraftingManager.performCrucibleCrafting(player, tile2);
                 return true;
             }
         }

@@ -42,30 +42,34 @@ public class SlotCraftingInfusionWorkbench extends SlotCrafting {
         );
         this.onCrafting(par1ItemStack);
         int cost;
-        TileMagicWorkbench bridge = AuracoreCraftingManager.createBridgeInventory(this.craftMatrix, 0, 9);
-        IArcaneRecipe recipe = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.thePlayer);
+        TileMagicWorkbench bridge
+            = AuracoreCraftingManager.createBridgeInventory(this.craftMatrix, 0, 9);
+        IArcaneRecipe recipe
+            = AuracoreCraftingManager.findMatchingArcaneRecipe(bridge, this.thePlayer);
         cost = AuracoreCraftingManager.getArcaneRecipeVisCost(recipe, bridge);
         if (cost == 0) {
-        IInfusionRecipe rec = AuracoreCraftingManager.findMatchingInfusionRecipe(
-            bridge, this.thePlayer
-        );
-        if (rec != null) {
-            cost = rec.getCost();
-            final AspectList tags = rec.getAspects();
-            if (tags != null && tags.size() > 0) {
-                final TileInfusionWorkbench tiwb
-                    = (TileInfusionWorkbench) this.craftMatrix;
-                for (final Aspect tag : tags.getAspects()) {
-                    final IAspectSource as = tiwb.foundAspects.getSource(tag);
-                    if (as != null) {
-                        as.takeFromContainer(tag, tags.getAmount(tag));
+            IInfusionRecipe rec = AuracoreCraftingManager.findMatchingInfusionRecipe(
+                bridge, this.thePlayer
+            );
+            if (rec != null) {
+                cost = rec.getCost();
+                final AspectList tags = rec.getAspects();
+                if (tags != null && tags.size() > 0) {
+                    final TileInfusionWorkbench tiwb
+                        = (TileInfusionWorkbench) this.craftMatrix;
+                    for (final Aspect tag : tags.getAspects()) {
+                        final IAspectSource as = tiwb.foundAspects.getSource(tag);
+                        if (as != null) {
+                            as.takeFromContainer(tag, tags.getAmount(tag));
+                        }
                     }
                 }
             }
-            }
         }
         if (cost > 0) {
-            WandManager.spendCharge(this.craftMatrix.getStackInSlot(10), par1EntityPlayer, cost);
+            WandManager.spendCharge(
+                this.craftMatrix.getStackInSlot(10), par1EntityPlayer, cost
+            );
         }
         for (int var2 = 0; var2 < 9; ++var2) {
             final ItemStack var3 = this.craftMatrix.getStackInSlot(var2);

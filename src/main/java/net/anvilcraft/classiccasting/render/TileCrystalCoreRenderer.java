@@ -3,6 +3,7 @@ package net.anvilcraft.classiccasting.render;
 import java.awt.Color;
 import java.util.Random;
 
+import dev.tilera.auracore.api.CrystalColors;
 import net.anvilcraft.classiccasting.render.models.ModelCrystal;
 import net.anvilcraft.classiccasting.tiles.TileCrystalCore;
 import net.minecraft.client.Minecraft;
@@ -16,8 +17,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
-import dev.tilera.auracore.api.CrystalColors;
 
 public class TileCrystalCoreRenderer extends TileEntitySpecialRenderer {
     private ModelCrystal model;
@@ -85,7 +84,8 @@ public class TileCrystalCoreRenderer extends TileEntitySpecialRenderer {
     ) {
         final TileCrystalCore tco = (TileCrystalCore) te;
         GL11.glPushMatrix();
-        this.bindTexture(new ResourceLocation("classiccasting", "textures/models/crystal.png")
+        this.bindTexture(
+            new ResourceLocation("classiccasting", "textures/models/crystal.png")
         );
         final Random rand = new Random(tco.xCoord + tco.yCoord * tco.zCoord);
         int col = 0;

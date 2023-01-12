@@ -99,12 +99,7 @@ public class ItemBlockAlembic extends ItemBlock {
                     );
                     --stack.stackSize;
                     world.setBlock(
-                        x,
-                        y,
-                        z,
-                        CCBlocks.alembic,
-                        dir.getOpposite().ordinal() - 2,
-                        3
+                        x, y, z, CCBlocks.alembic, dir.getOpposite().ordinal() - 2, 3
                     );
                     return true;
                 }
