@@ -8,6 +8,8 @@ import dev.tilera.auracore.api.Aspects;
 import dev.tilera.auracore.api.research.IResearchTable;
 import dev.tilera.auracore.api.research.ResearchTableExtension;
 import net.anvilcraft.classiccasting.CCItems;
+import net.anvilcraft.classiccasting.ClassicCasting;
+import net.anvilcraft.classiccasting.GuiType;
 import net.anvilcraft.classiccasting.items.ItemResearchNotes;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -81,12 +83,12 @@ public class ClassicResearchTableExtension
 
     @Override
     public void writeToPacket(NBTTagCompound nbt) {
-        nbt.setBoolean("safe", this.safe);
+        this.writeToNBT(nbt);
     }
 
     @Override
     public void readFromPacket(NBTTagCompound nbt) {
-        this.safe = nbt.getBoolean("safe");
+        this.readFromNBT(nbt);
     }
 
     @Override
@@ -107,8 +109,15 @@ public class ClassicResearchTableExtension
 
     @Override
     public boolean openGUI(EntityPlayer player) {
-        // TODO: Implement this
-        return false;
+        player.openGui(
+            ClassicCasting.INSTANCE,
+            GuiType.RESEARCH_TABLE.ordinal(),
+            this.getWorld(),
+            this.getXCoord(),
+            this.getYCoord(),
+            this.getZCoord()
+        );
+        return true;
     }
 
     @Override
@@ -130,7 +139,7 @@ public class ClassicResearchTableExtension
                 CCResearchManager.createResearchNoteForTable(this, key);
                 if (this.contents[5] != null) {
                     CCResearchManager.progressTableResearch(
-                        this.world,
+                        this.getWorld(),
                         this.researcher,
                         this,
                         this.contents[5],
@@ -149,7 +158,7 @@ public class ClassicResearchTableExtension
             }
         } else if (this.contents[5].getItem() == CCItems.researchNotes && this.contents[5].getItemDamage() < 64) {
             CCResearchManager.progressTableResearch(
-                this.world,
+                this.getWorld(),
                 this.researcher,
                 this,
                 this.contents[5],
@@ -166,19 +175,20 @@ public class ClassicResearchTableExtension
     }
 
     public void startResearch() {
-        this.world.playSoundEffect(
-            (double) this.xCoord,
-            (double) this.yCoord,
-            (double) this.zCoord,
+        this.getWorld().playSoundEffect(
+            (double) this.getXCoord(),
+            (double) this.getYCoord(),
+            (double) this.getZCoord(),
             "random.click",
             0.15f,
             0.8f
         );
-        if (!this.world.isRemote) {
+        if (!this.getWorld().isRemote) {
             this.doResearch();
             int chance = this.baseLoss;
             for (int a = 0; a < 5; ++a) {
-                if (this.contents[a] == null || this.world.rand.nextInt(100) >= chance)
+                if (this.contents[a] == null
+                    || this.getWorld().rand.nextInt(100) >= chance)
                     continue;
                 --this.contents[a].stackSize;
                 if (this.contents[a].stackSize != 0)
@@ -186,17 +196,19 @@ public class ClassicResearchTableExtension
                 this.contents[a] = null;
             }
         }
-        this.world.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+        this.getWorld().markBlockForUpdate(
+            this.getXCoord(), this.getYCoord(), this.getZCoord()
+        );
         this.markDirty();
     }
 
     public void toggleSafe() {
         this.safe = !this.safe;
         this.recalcBaseChance();
-        this.world.playSoundEffect(
-            (double) this.xCoord,
-            (double) this.yCoord,
-            (double) this.zCoord,
+        this.getWorld().playSoundEffect(
+            (double) this.getXCoord(),
+            (double) this.getYCoord(),
+            (double) this.getZCoord(),
             "step.wood",
             0.3f,
             1.2f
@@ -276,46 +288,54 @@ public class ClassicResearchTableExtension
 
     private void recalculateBonus() {
         List<EntityLivingBase> ents;
-        if (!this.world.isDaytime()
-            && this.world.getBlockLightValue(this.xCoord, this.yCoord + 1, this.zCoord)
-                < 4
-            && !this.world.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord)) {
+        if (!this.getWorld().isDaytime()
+            && this.getWorld().getBlockLightValue(
+                   this.getXCoord(), this.getYCoord() + 1, this.getZCoord()
+               ) < 4
+            && !this.getWorld().canBlockSeeTheSky(
+                this.getXCoord(), this.getYCoord() + 1, this.getZCoord()
+            )) {
             this.incrementTagBonus(1.0f, Arrays.asList(new Aspect[] { Aspect.DARKNESS }));
         }
-        if (this.world.isDaytime()
-            && this.world.getBlockLightValue(this.xCoord, this.yCoord + 1, this.zCoord)
-                > 11
-            && this.world.canBlockSeeTheSky(this.xCoord, this.yCoord + 1, this.zCoord)) {
+        if (this.getWorld().isDaytime()
+            && this.getWorld().getBlockLightValue(
+                   this.getXCoord(), this.getYCoord() + 1, this.getZCoord()
+               ) > 11
+            && this.getWorld().canBlockSeeTheSky(
+                this.getXCoord(), this.getYCoord() + 1, this.getZCoord()
+            )) {
             this.incrementTagBonus(1.0f, Arrays.asList(new Aspect[] { Aspect.LIGHT }));
         }
-        if ((float) this.yCoord > (float) this.world.getActualHeight() * 0.5f) {
+        if ((float) this.getYCoord() > (float) this.getWorld().getActualHeight() * 0.5f) {
             this.incrementTagBonus(1.0f, Arrays.asList(new Aspect[] { Aspect.AIR }));
         }
-        if ((float) this.yCoord > (float) this.world.getActualHeight() * 0.66f) {
+        if ((float) this.getYCoord()
+            > (float) this.getWorld().getActualHeight() * 0.66f) {
             this.incrementTagBonus(1.0f, Arrays.asList(new Aspect[] { Aspect.AIR }));
         }
-        if ((float) this.yCoord > (float) this.world.getActualHeight() * 0.75f) {
+        if ((float) this.getYCoord()
+            > (float) this.getWorld().getActualHeight() * 0.75f) {
             this.incrementTagBonus(1.0f, Arrays.asList(new Aspect[] { Aspect.AIR }));
         }
-        if (this.world.isRaining()) {
+        if (this.getWorld().isRaining()) {
             this.incrementTagBonus(1.0f, Arrays.asList(new Aspect[] { Aspect.WEATHER }));
         }
-        if (this.world.isThundering()) {
+        if (this.getWorld().isThundering()) {
             this.incrementTagBonus(
                 1.0f,
                 Arrays.asList(new Aspect[] { Aspect.WEATHER, Aspect.ENERGY, Aspect.AIR })
             );
         }
-        if ((ents = this.world.getEntitiesWithinAABB(
+        if ((ents = this.getWorld().getEntitiesWithinAABB(
                  EntityLivingBase.class,
                  AxisAlignedBB
                      .getBoundingBox(
-                         (double) this.xCoord,
-                         (double) this.yCoord,
-                         (double) this.zCoord,
-                         (double) (this.xCoord + 1),
-                         (double) (this.yCoord + 1),
-                         (double) (this.zCoord + 1)
+                         (double) this.getXCoord(),
+                         (double) this.getYCoord(),
+                         (double) this.getZCoord(),
+                         (double) (this.getXCoord() + 1),
+                         (double) (this.getYCoord() + 1),
+                         (double) (this.getZCoord() + 1)
                      )
                      .expand(15.0, 15.0, 15.0)
              ))
@@ -422,14 +442,14 @@ public class ClassicResearchTableExtension
         for (int x = -10; x <= 10; ++x) {
             for (int z = -10; z <= 10; ++z) {
                 for (int y = -10; y <= 10; ++y) {
-                    if (y + this.yCoord <= 0
-                        || y + this.yCoord >= this.world.getActualHeight())
+                    if (y + this.getYCoord() <= 0
+                        || y + this.getYCoord() >= this.getWorld().getActualHeight())
                         continue;
-                    Block bi = this.world.getBlock(
-                        x + this.xCoord, y + this.yCoord, z + this.zCoord
+                    Block bi = this.getWorld().getBlock(
+                        x + this.getXCoord(), y + this.getYCoord(), z + this.getZCoord()
                     );
-                    int md = this.world.getBlockMetadata(
-                        x + this.xCoord, y + this.yCoord, z + this.zCoord
+                    int md = this.getWorld().getBlockMetadata(
+                        x + this.getXCoord(), y + this.getYCoord(), z + this.getZCoord()
                     );
                     Material bm = bi.getMaterial();
                     if (bi == Blocks.jukebox) {
@@ -797,13 +817,14 @@ public class ClassicResearchTableExtension
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer var1) {
-        return this.world.getTileEntity(this.xCoord, this.yCoord, this.zCoord)
-                != this.getResearchTable()
+        return this.getWorld().getTileEntity(
+                   this.getXCoord(), this.getYCoord(), this.getZCoord()
+               ) != this.getResearchTable()
             ? false
             : var1.getDistanceSq(
-                  (double) this.xCoord + 0.5,
-                  (double) this.yCoord + 0.5,
-                  (double) this.zCoord + 0.5
+                  (double) this.getXCoord() + 0.5,
+                  (double) this.getYCoord() + 0.5,
+                  (double) this.getZCoord() + 0.5
               ) <= 64.0;
     }
 

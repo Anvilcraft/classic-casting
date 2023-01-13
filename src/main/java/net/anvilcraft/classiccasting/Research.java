@@ -106,6 +106,25 @@ public class Research {
             .registerResearchItem();
 
         new ResearchItem(
+            "AURACOMPASS",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.MIND, 8)
+                .add(Aspect.MECHANISM, 4),
+            -2,
+            0,
+            2,
+            new ItemStack(CCItems.auraCompass)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.AURACOMPASS"),
+                new ResearchPage(arcaneRecipes.get("AuraCompass"))
+            )
+            .setParents("MAGBLOCKS")
+            .registerResearchItem();
+
+        new ResearchItem(
             "CRYSTALCORE",
             "CLASSICCASTING",
             new AspectList()

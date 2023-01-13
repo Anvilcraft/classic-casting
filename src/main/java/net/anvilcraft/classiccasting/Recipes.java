@@ -29,6 +29,22 @@ public class Recipes {
             )
         );
 
+        Research.arcaneRecipes.put(
+            "AuraCompass",
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                "AURACOMPASS",
+                new ItemStack(CCItems.auraCompass),
+                new AspectList().add(Aspects.VIS, 20),
+                " G ",
+                "GCG",
+                " G ",
+                'G',
+                Items.gold_ingot,
+                'C',
+                new ItemStack(ConfigItems.itemShard, 1, 2)
+            )
+        );
+
         Research.infusionRecipes.put(
             "CrystalCore",
             AuracoreRecipes.addInfusionCraftingRecipe(

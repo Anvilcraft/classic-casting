@@ -70,3 +70,7 @@ classiccasting.research_page.WANDEXCAVATE=You have successfully adapted the ench
 tc.research_name.WANDLIGHTNING=Wand of Lightning
 tc.research_text.WANDLIGHTNING=...very, very frightening
 classiccasting.research_page.WANDLIGHTNING=You have successfully adapted the enchantment on an apprentice wand. It is now capable of focusing elemental energy into bolts of lightning.<BR><BR>However the wand has lost the ability to renew its charge and will eventually run out of energy and break.
+
+tc.research_name.AURACOMPASS=Aura Compass
+tc.research_text.AURACOMPASS=Magical detector
+classiccasting.research_page.AURACOMPASS=The Aura Compass acts like a mystical compass, pointing you towards the center of the nearest magical aura.<BR><BR>You are confident you will be able to craft more refined devices in the future allowing you to discover more information about aura nodes.<BR>For now this will have to do.

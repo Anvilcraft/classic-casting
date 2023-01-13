@@ -3,8 +3,10 @@ package net.anvilcraft.classiccasting;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
+import dev.tilera.auracore.api.research.IResearchTable;
 import net.anvilcraft.classiccasting.entities.EntityFrostShard;
 import net.anvilcraft.classiccasting.gui.GuiInfusionWorkbench;
+import net.anvilcraft.classiccasting.gui.GuiResearchTable;
 import net.anvilcraft.classiccasting.render.BlockAlembicRenderer;
 import net.anvilcraft.classiccasting.render.BlockCrystalRenderer;
 import net.anvilcraft.classiccasting.render.BlockInfusionWorkbenchRenderer;
@@ -14,6 +16,7 @@ import net.anvilcraft.classiccasting.render.TileAlembicRenderer;
 import net.anvilcraft.classiccasting.render.TileCrystalCapacitorRenderer;
 import net.anvilcraft.classiccasting.render.TileCrystalCoreRenderer;
 import net.anvilcraft.classiccasting.render.TileInfusionWorkbenchRenderer;
+import net.anvilcraft.classiccasting.research.ClassicResearchTableExtension;
 import net.anvilcraft.classiccasting.tiles.TileAlembic;
 import net.anvilcraft.classiccasting.tiles.TileCrystalCapacitor;
 import net.anvilcraft.classiccasting.tiles.TileCrystalCore;
@@ -79,6 +82,14 @@ public class ClientProxy extends CommonProxy {
             case INFUSION_WORKBENCH:
                 return new GuiInfusionWorkbench(
                     player.inventory, (TileInfusionWorkbench) world.getTileEntity(x, y, z)
+                );
+
+            case RESEARCH_TABLE:
+                return new GuiResearchTable(
+                    player,
+                    (ClassicResearchTableExtension
+                    ) ((IResearchTable) world.getTileEntity(x, y, z))
+                        .getInternalExtension()
                 );
 
             default:

@@ -76,7 +76,7 @@ public class ItemResearchNotes extends Item {
                 )) {
                 PacketHandler.INSTANCE.sendTo(
                     new PacketResearchComplete(
-                        ResearchManager.getData((ItemStack) stack).key
+                        CCResearchManager.getData((ItemStack) stack).key
                     ),
                     (EntityPlayerMP) player
                 );
@@ -86,7 +86,7 @@ public class ItemResearchNotes extends Item {
                 String[] siblings
                     = ResearchCategories
                           .getResearch(
-                              (String) ResearchManager.getData((ItemStack) stack).key
+                              (String) CCResearchManager.getData((ItemStack) stack).key
                           )
                           .siblings;
                 if (siblings != null) {
@@ -158,7 +158,7 @@ public class ItemResearchNotes extends Item {
     ) {
         if (CCResearchManager.getData(stack).getTotalProgress() >= 0.2f) {
             ResearchItem item = ResearchCategories.getResearch(
-                ResearchManager.getData((ItemStack) stack).key
+                CCResearchManager.getData((ItemStack) stack).key
             );
             if (item != null)
                 list.add(item.getName());

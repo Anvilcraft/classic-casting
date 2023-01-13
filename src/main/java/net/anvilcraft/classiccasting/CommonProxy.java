@@ -3,7 +3,10 @@ package net.anvilcraft.classiccasting;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
+import dev.tilera.auracore.api.research.IResearchTable;
 import net.anvilcraft.classiccasting.container.ContainerInfusionWorkbench;
+import net.anvilcraft.classiccasting.container.ContainerResearchTable;
+import net.anvilcraft.classiccasting.research.ClassicResearchTableExtension;
 import net.anvilcraft.classiccasting.tiles.TileAlembic;
 import net.anvilcraft.classiccasting.tiles.TileCrystalCapacitor;
 import net.anvilcraft.classiccasting.tiles.TileCrystalCore;
@@ -36,6 +39,14 @@ public class CommonProxy implements IGuiHandler {
             case INFUSION_WORKBENCH:
                 return new ContainerInfusionWorkbench(
                     player.inventory, (TileInfusionWorkbench) world.getTileEntity(x, y, z)
+                );
+
+            case RESEARCH_TABLE:
+                return new ContainerResearchTable(
+                    player.inventory,
+                    (ClassicResearchTableExtension
+                    ) ((IResearchTable) world.getTileEntity(x, y, z))
+                        .getInternalExtension()
                 );
 
             default:
