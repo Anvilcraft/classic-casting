@@ -7,7 +7,9 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry;
+import dev.tilera.auracore.api.research.ResearchTableExtensionRegistry;
 import net.anvilcraft.classiccasting.entities.EntityFrostShard;
+import net.anvilcraft.classiccasting.research.ClassicResearchTableExtension;
 
 @Mod(
     modid = "classiccasting",
@@ -49,6 +51,8 @@ public class ClassicCasting {
         Recipes.init();
 
         proxy.init();
+
+        ResearchTableExtensionRegistry.registerResearchTableExtension(ClassicResearchTableExtension.class, true);
     }
 
     @Mod.EventHandler
