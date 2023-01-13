@@ -52,7 +52,9 @@ public class ClassicCasting {
 
         proxy.init();
 
-        ResearchTableExtensionRegistry.registerResearchTableExtension(ClassicResearchTableExtension.class, true);
+        ResearchTableExtensionRegistry.registerResearchTableExtension(
+            ClassicResearchTableExtension.class, true
+        );
     }
 
     @Mod.EventHandler

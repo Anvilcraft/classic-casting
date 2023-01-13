@@ -22,8 +22,8 @@ public class ResearchNoteData {
         float totala = 0.0f;
         float totalb = 0.0f;
         for (Aspect a : tags.getAspects()) {
-            totala += (float)this.progress.get(a);
-            totalb += (float)rr.tags.getAmount(a);
+            totala += (float) this.progress.get(a);
+            totalb += (float) rr.tags.getAmount(a);
         }
         return totala / totalb;
     }
@@ -34,8 +34,9 @@ public class ResearchNoteData {
             return 0.0f;
         }
         for (Aspect a : tags.getAspects()) {
-            if (this.tags == null || tag != a) continue;
-            return (float)this.progress.get(a) / (float)rr.tags.getAmount(a);
+            if (this.tags == null || tag != a)
+                continue;
+            return (float) this.progress.get(a) / (float) rr.tags.getAmount(a);
         }
         return 0.0f;
     }
