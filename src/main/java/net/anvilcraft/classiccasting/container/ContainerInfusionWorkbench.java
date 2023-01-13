@@ -111,7 +111,9 @@ public class ContainerInfusionWorkbench extends Container {
                     this.tileEntity.getStackInSlot(10), this.ip.player, rec.getCost()
                 )
                 && this.tileEntity.doSourcesMatch(rec.getAspects())) {
-                this.tileEntity.setInventorySlotContentsSoftly(9, rec.getRecipeOutput());
+                this.tileEntity.setInventorySlotContentsSoftly(
+                    9, rec.getCraftingResult(bridge)
+                );
             }
         }
     }
@@ -175,14 +177,5 @@ public class ContainerInfusionWorkbench extends Container {
             var3.onPickupFromSlot(this.ip.player, var4);
         }
         return var2;
-    }
-
-    public ItemStack slotClick(
-        final int par1,
-        final int par2,
-        final int par3,
-        final EntityPlayer par4EntityPlayer
-    ) {
-        return super.slotClick(par1, par2, par3, par4EntityPlayer);
     }
 }
