@@ -74,3 +74,15 @@ classiccasting.research_page.WANDLIGHTNING=You have successfully adapted the enc
 tc.research_name.AURACOMPASS=Aura Compass
 tc.research_text.AURACOMPASS=Magical detector
 classiccasting.research_page.AURACOMPASS=The Aura Compass acts like a mystical compass, pointing you towards the center of the nearest magical aura.<BR><BR>You are confident you will be able to craft more refined devices in the future allowing you to discover more information about aura nodes.<BR>For now this will have to do.
+
+tc.research_name.THETHEORYOFEVERYTHING=The Theory of Everything
+tc.research_text.THETHEORYOFEVERYTHING=Well, almost everything
+classiccasting.research_pange.THETHEORYOFEVERYTHING=You understanding of the material and mystical worlds have grown considerably and you now have a much greater grasp of how magic interacts with solid matter.<BR><BR>Not only is this knowledge enlightening, it has some practical applications. Once again it has led you to an improvement of your casting wand. You now know how to create a Wand of the Thaumaturge. <BR><BR>It is similar to the Wand of the Adept, except it is able to store much more vis thus allowing for larger and more complex feats of magic. It also recharges faster.
+
+tc.research_name.HELLROD=Rod of the Nine Hells
+tc.research_text.HELLROD=Nether on a stick.
+classiccasting.research_page.HELLROD=You have discovered a way to summon the little terrors and send them after your enemies. <BR><BR>You have bound this power into a special rod and once it has gathered enough vis it can be used to summon a hellbat.
+
+tc.research_name.PORTABLEHOLE=Portable Hole
+tc.research_text.PORTABLEHOLE=Never without an exit again
+classiccasting.research_page.PORTABLEHOLE=You have succeeded in creating a Portable Hole. Simply placing this strange sheet of fabric against a solid surface will reveal an extra dimensional passage leading to the other side.<BR>This 'hole' only remains open for a few seconds and drains charge from the Portable Hole equal to the amount of matter shifted. The hole does recharge itself by drawing vis from the aura.<BR>Holes cannot be created through certain kinds of matter or particularly complex objects.

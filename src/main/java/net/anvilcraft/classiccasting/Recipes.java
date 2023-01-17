@@ -5,6 +5,8 @@ import dev.tilera.auracore.api.AuracoreRecipes;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
@@ -12,7 +14,21 @@ import thaumcraft.common.config.ConfigBlocks;
 import thaumcraft.common.config.ConfigItems;
 
 public class Recipes {
+    @SuppressWarnings("unchecked")
     public static void init() {
+        CraftingManager.getInstance().getRecipeList().add(new ShapedOreRecipe(
+            CCItems.wandCastingApprentice,
+            "  C",
+            " S ",
+            "G  ",
+            'C',
+            new ItemStack(ConfigItems.itemShard, 1, 32767),
+            'S',
+            "stickWood",
+            'G',
+            "nuggetGold"
+        ));
+
         Research.arcaneRecipes.put(
             "ArcaneStone",
             ThaumcraftApi.addArcaneCraftingRecipe(
@@ -188,7 +204,6 @@ public class Recipes {
                 "WANDLIGHTNING",
                 "WANDLIGHTNING",
                 50,
-                // TODO: this used to be Aspect.POWER. is ENERGY correct?
                 new AspectList().add(Aspect.ENERGY, 16).add(Aspect.WEAPON, 4),
                 new ItemStack(CCItems.wandLightning),
                 "SS",
@@ -197,6 +212,110 @@ public class Recipes {
                 new ItemStack(CCItems.wandCastingApprentice, 1, 32767),
                 'S',
                 new ItemStack(ConfigItems.itemShard, 1, 0)
+            )
+        );
+
+        Research.infusionRecipes.put(
+            "FluxFilter",
+            AuracoreRecipes.addInfusionCraftingRecipe(
+                "FLUXFILTER",
+                "BASICFLUX",
+                25,
+                new AspectList().add(Aspects.PURE, 8).add(Aspect.EXCHANGE, 8),
+                new ItemStack(ConfigItems.itemResource, 1, 8),
+                "GFG",
+                'F',
+                new ItemStack(ConfigBlocks.blockMagicalLog, 1, 1),
+                'G',
+                Items.gold_ingot
+            )
+        );
+
+        Research.infusionRecipes.put(
+            "Alembic",
+            AuracoreRecipes.addInfusionCraftingRecipe(
+                "BASICFLUX",
+                "ALEMBIC",
+                75,
+                new AspectList()
+                    .add(Aspect.AIR, 8)
+                    .add(Aspect.WATER, 8)
+                    .add(Aspect.CRYSTAL, 8),
+                new ItemStack(ConfigBlocks.blockMetalDevice, 1, 1),
+                "GFG",
+                "J G",
+                "B  ",
+                'F',
+                new ItemStack(ConfigItems.itemResource, 1, 8),
+                'J',
+                new ItemStack(ConfigBlocks.blockJar, 1, 0),
+                'B',
+                Items.brewing_stand,
+                'G',
+                Items.gold_ingot
+            )
+        );
+
+        Research.infusionRecipes.put(
+            "MageWand",
+            AuracoreRecipes.addInfusionCraftingRecipe(
+                "WANDMAGE",
+                "THETHEORYOFEVERYTHING",
+                250,
+                new AspectList().add(Aspect.MAGIC, 32),
+                new ItemStack(CCItems.wandCastingMage),
+                " N",
+                "S ",
+                'S',
+                new ItemStack(CCItems.wandCastingAdept, 1, 32767),
+                'N',
+                Items.nether_star
+            )
+        );
+
+        Research.infusionRecipes.put(
+            "WandHellrod",
+            AuracoreRecipes.addInfusionCraftingRecipe(
+                "HELLROD",
+                "HELLROD",
+                250,
+                new AspectList()
+                    .add(Aspects.EVIL, 32)
+                    .add(Aspect.FIRE, 32)
+                    .add(Aspect.BEAST, 32),
+                new ItemStack(CCItems.wandHellrod),
+                " GN",
+                " SG",
+                "W  ",
+                'S',
+                new ItemStack(CCItems.wandFire, 1, 32767),
+                'W',
+                new ItemStack(CCItems.wandCastingAdept, 1, 32767),
+                'N',
+                Blocks.tnt,
+                'G',
+                Items.gold_ingot
+            )
+        );
+
+        Research.infusionRecipes.put(
+            "PortableHole",
+            AuracoreRecipes.addInfusionCraftingRecipe(
+                "PORTABLEHOLE",
+                "PORTABLEHOLE",
+                200,
+                new AspectList()
+                    .add(Aspect.VOID, 24)
+                    .add(Aspect.ELDRITCH, 24)
+                    .add(Aspect.EXCHANGE, 16),
+                new ItemStack(CCItems.portableHole),
+                " C ",
+                "CEC",
+                " C ",
+                'C',
+                new ItemStack(ConfigItems.itemResource, 1, 7),
+                'E',
+                Items.ender_pearl
             )
         );
     }

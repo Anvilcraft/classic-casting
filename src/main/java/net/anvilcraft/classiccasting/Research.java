@@ -10,6 +10,7 @@ import dev.tilera.auracore.api.crafting.IInfusionRecipe;
 import dev.tilera.auracore.api.research.ResearchPageInfusion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.crafting.IArcaneRecipe;
@@ -90,8 +91,8 @@ public class Research {
                 .add(Aspect.MAGIC, 1)
                 .add(Aspect.TREE, 1)
                 .add(Aspect.CRAFT, 1),
-            0,
-            0,
+            -2,
+            -2,
             2,
             new ItemStack(CCBlocks.infusionWorkbench)
         )
@@ -134,8 +135,8 @@ public class Research {
                 .add(Aspects.FLUX, 16)
                 .add(Aspect.MOTION, 32)
                 .add(Aspect.VOID, 16),
-            0,
-            2,
+            -3,
+            7,
             3,
             new ItemStack(CCBlocks.crystal)
         )
@@ -145,6 +146,7 @@ public class Research {
                 new ResearchPage("classiccasting.research_page.CRYSTALCORE.2"),
                 new ResearchPage(magnetStructure)
             )
+            .setParents("THETHEORYOFEVERYTHING")
             .registerResearchItem();
 
         new ResearchItem(
@@ -154,8 +156,8 @@ public class Research {
                 .add(Aspect.CRYSTAL, 24)
                 .add(Aspect.MAGIC, 32)
                 .add(Aspect.EXCHANGE, 24),
-            -2,
-            2,
+            -5,
+            7,
             1,
             new ItemStack(CCBlocks.crystal, 1, 1)
         )
@@ -165,9 +167,6 @@ public class Research {
             )
             .setParents("CRYSTALCORE")
             .registerResearchItem();
-
-        int utftCol = 3;
-        int utftRow = -2;
 
         new ResearchItem(
             "UNIFIEDTHAUMICFIELDTHEORY",
@@ -181,8 +180,8 @@ public class Research {
                 .add(Aspect.EARTH, 8)
                 .add(Aspect.WATER, 8)
                 .add(Aspects.TIME, 4),
-            utftCol,
-            utftRow,
+            0,
+            0,
             3,
             new ResourceLocation(
                 "classiccasting", "textures/misc/unified_thaumic_field_theory.png"
@@ -193,6 +192,7 @@ public class Research {
                 ),
                 new ResearchPageInfusion(infusionRecipes.get("AdeptWand"))
             )
+            .setParents("MAGBLOCKS")
             .setSpecial()
             .registerResearchItem();
 
@@ -204,8 +204,8 @@ public class Research {
                 .add(Aspect.MAGIC, 8)
                 .add(Aspect.WEAPON, 8)
                 .add(Aspect.FIRE, 8),
-            utftCol + 1,
-            utftRow + 2,
+            1,
+            2,
             2,
             new ItemStack(CCItems.wandFire)
         )
@@ -220,8 +220,8 @@ public class Research {
             "WANDFROST",
             "CLASSICCASTING",
             new AspectList().add(Aspect.COLD, 16).add(Aspect.WEAPON, 4),
-            utftCol + 1,
-            utftRow + 3,
+            1,
+            3,
             2,
             new ItemStack(CCItems.wandFrost)
         )
@@ -239,8 +239,8 @@ public class Research {
                 .add(Aspect.EXCHANGE, 16)
                 .add(Aspect.MAGIC, 8)
                 .add(Aspect.TOOL, 8),
-            utftCol - 1,
-            utftRow + 4,
+            -1,
+            4,
             2,
             new ItemStack(CCItems.wandTrade)
         )
@@ -255,8 +255,8 @@ public class Research {
             "WANDEXCAVATE",
             "CLASSICCASTING",
             new AspectList().add(Aspect.METAL, 16).add(Aspect.TOOL, 4),
-            utftCol - 1,
-            utftRow + 3,
+            -1,
+            3,
             2,
             new ItemStack(CCItems.wandExcavation)
         )
@@ -274,18 +274,121 @@ public class Research {
                 .add(Aspects.DESTRUCTION, 8)
                 .add(Aspect.MAGIC, 8)
                 .add(Aspect.WEAPON, 8)
-                // TODO: this used to be Aspect.POWER. is ENERGY correct?
                 .add(Aspect.ENERGY, 8),
-            utftCol + 1,
-            utftRow + 4,
+            1,
+            4,
             2,
             new ItemStack(CCItems.wandLightning)
         )
             .setPages(
                 new ResearchPage("classiccasting.research_page.WANDLIGHTNING"),
-                new ResearchPageInfusion(infusionRecipes.get("wandLightning"))
+                new ResearchPageInfusion(infusionRecipes.get("WandLightning"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY")
+            .registerResearchItem();
+
+        new ResearchItem(
+            "BASICFLUX",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspects.FLUX, 20)
+                .add(Aspects.CONTROL, 8)
+                .add(Aspect.EXCHANGE, 8)
+                .add(Aspects.PURE, 8)
+                .add(Aspect.MECHANISM, 4),
+            -3,
+            4,
+            2,
+            new ResourceLocation("classiccasting", "textures/misc/basic_flux.png")
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.BASICFLUX.1"),
+                new ResearchPageInfusion(infusionRecipes.get("FluxFilter")),
+                new ResearchPage("classiccasting.research_page.BASICFLUX.2"),
+                new ResearchPageInfusion(infusionRecipes.get("Alembic")),
+                new ResearchPage("classiccasting.research_page.BASICFLUX.3")
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY", "DISTILESSENTIA")
+            .registerResearchItem();
+
+        new ResearchItem(
+            "THETHEORYOFEVERYTHING",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.MIND, 24)
+                .add(Aspect.ARMOR, 8)
+                .add(Aspects.INSECT, 8)
+                .add(Aspect.PLANT, 8)
+                .add(Aspect.WEAPON, 8)
+                .add(Aspect.BEAST, 8)
+                .add(Aspect.FLESH, 8)
+                .add(Aspect.LIFE, 8)
+                .add(Aspect.POISON, 8)
+                .add(Aspect.TREE, 8)
+                .add(Aspect.CROP, 8)
+                .add(Aspects.FLOWER, 8)
+                .add(Aspect.MECHANISM, 8)
+                .add(Aspects.SOUND, 8)
+                .add(Aspect.CRYSTAL, 8)
+                .add(Aspects.FUNGUS, 8)
+                .add(Aspect.METAL, 8)
+                .add(Aspect.TOOL, 8),
+            0,
+            7,
+            3,
+            new ResourceLocation(
+                "classiccasting", "textures/misc/the_theory_of_everything.png"
+            )
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.THETHEORYOFEVERYTHING"),
+                new ResearchPageInfusion(infusionRecipes.get("WandMage"))
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY", "BASICFLUX", "GOLEMSTRAW")
+            .setSpecial()
+            .registerResearchItem();
+
+        new ResearchItem(
+            "HELLROD",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.FIRE, 24)
+                .add(Aspect.MAGIC, 16)
+                .add(Aspect.WEAPON, 16)
+                .add(Aspect.BEAST, 24)
+                .add(Aspects.EVIL, 24),
+            3,
+            7,
+            2,
+            new ItemStack(CCItems.wandHellrod)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.HELLROD"),
+                new ResearchPageInfusion(infusionRecipes.get("WandHellrod"))
+            )
+            .setParents("THETHEORYOFEVERYTHING", "WANDFIRE")
+            .registerResearchItem();
+        ThaumcraftApi.addWarpToResearch("HELLROD", 2);
+        ThaumcraftApi.addWarpToItem(new ItemStack(CCItems.wandHellrod), 1);
+
+        new ResearchItem(
+            "PORTABLEHOLE",
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.VOID, 20)
+                .add(Aspect.MOTION, 8)
+                .add(Aspect.ELDRITCH, 8)
+                .add(Aspect.EXCHANGE, 8),
+            -3,
+            2,
+            1,
+            new ItemStack(CCItems.portableHole)
+        )
+            .setPages(
+                new ResearchPage("classiccasting.research_page.PORTABLEHOLE"),
+                new ResearchPageInfusion(infusionRecipes.get("PortableHole"))
+            )
+            .setParents("UNIFIEDTHAUMICFIELDTHEORY", "ENCHFABRIC")
             .registerResearchItem();
     }
 }
