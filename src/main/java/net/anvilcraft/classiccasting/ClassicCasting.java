@@ -50,6 +50,8 @@ public class ClassicCasting {
 
         Recipes.init();
 
+        ItemAspects.init();
+
         proxy.init();
 
         ResearchTableExtensionRegistry.registerResearchTableExtension(
