@@ -342,7 +342,7 @@ public class Research {
         )
             .setPages(
                 new ResearchPage("classiccasting.research_page.THETHEORYOFEVERYTHING"),
-                new ResearchPageInfusion(infusionRecipes.get("WandMage"))
+                new ResearchPageInfusion(infusionRecipes.get("MageWand"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY", "BASICFLUX", "GOLEMSTRAW")
             .setSpecial()
