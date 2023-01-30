@@ -81,6 +81,22 @@ public class Research {
             new ResourceLocation("thaumcraft", "textures/gui/gui_researchback.png")
         );
 
+        new ResearchItem("CCAURA", "CLASSICCASTING", new AspectList(), -2, -4, 1, new ResourceLocation("classiccasting", "textures/misc/aura.png"))
+            .setPages(
+                new ResearchPage("classiccasting.research_page.CCAURA.1"),
+                new ResearchPage("classiccasting.research_page.CCAURA.2")
+            )
+            .setAutoUnlock()
+            .registerResearchItem();
+
+        new ResearchItem("CCFLUX", "CLASSICCASTING", new AspectList(), -4, -4, 1, new ResourceLocation("classiccasting", "textures/misc/flux.png"))
+            .setPages(
+                new ResearchPage("classiccasting.research_page.CCFLUX.1"),
+                new ResearchPage("classiccasting.research_page.CCFLUX.2")
+            )
+            .setAutoUnlock()
+            .registerResearchItem();
+
         // TODO: move research to right place
         new ResearchItem(
             "MAGBLOCKS",
