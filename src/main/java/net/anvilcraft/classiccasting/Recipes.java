@@ -46,6 +46,33 @@ public class Recipes {
         );
 
         Research.arcaneRecipes.put(
+            "ArcaneWood1",
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                "MAGBLOCKS", 
+                new ItemStack(CCBlocks.blockArcaneWood, 2), 
+                new AspectList().add(Aspects.VIS, 20), 
+                "WWW",
+                "WWW",
+                "WWW",
+                'W',
+                "logWood"
+            )
+        );
+
+        Research.arcaneRecipes.put(
+            "ArcaneWood2",
+            ThaumcraftApi.addArcaneCraftingRecipe(
+                "MAGBLOCKS", 
+                new ItemStack(CCBlocks.blockArcaneWood, 4), 
+                new AspectList().add(Aspects.VIS, 20), 
+                "WW",
+                "WW",
+                'W',
+                new ItemStack(ConfigBlocks.blockMagicalLog, 1, 0)
+            )
+        );
+
+        Research.arcaneRecipes.put(
             "AuraCompass",
             ThaumcraftApi.addArcaneCraftingRecipe(
                 "AURACOMPASS",
@@ -100,9 +127,7 @@ public class Recipes {
                 'C',
                 new ItemStack(ConfigItems.itemShard, 1, 8),
                 'W',
-                // TODO: this is arcane wood, but that doesn't really exist yet.
-                // Just pretend the planks are magical
-                new ItemStack(Blocks.planks, 1, 0)
+                CCBlocks.blockArcaneWood
             )
         );
 

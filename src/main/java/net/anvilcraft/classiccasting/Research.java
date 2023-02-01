@@ -115,6 +115,8 @@ public class Research {
             .setPages(
                 new ResearchPage("classiccasting.research_page.MAGBLOCKS.1"),
                 new ResearchPage(arcaneRecipes.get("ArcaneStone")),
+                new ResearchPage(arcaneRecipes.get("ArcaneWood1")),
+                new ResearchPage(arcaneRecipes.get("ArcaneWood2")),
                 new ResearchPage("classiccasting.research_page.MAGBLOCKS.2"),
                 new ResearchPage(infusionStructure),
                 new ResearchPage("classiccasting.research_page.MAGBLOCKS.3")

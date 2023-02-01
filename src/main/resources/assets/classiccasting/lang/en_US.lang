@@ -22,6 +22,7 @@ tile.classiccasting:alembic.name=Arcane Alembic
 tile.classiccasting:crystal.0.name=Crystal Core
 tile.classiccasting:crystal.1.name=Crystal Capacitor
 tile.classiccasting:infusionWorkbench.name=Arcane Stone
+tile.classiccasting:blockArcaneWood.name=Arcane Wood Block
 
 # ---- RESEARCH ----
 tc.research_category.CLASSICCASTING=Classic Casting
