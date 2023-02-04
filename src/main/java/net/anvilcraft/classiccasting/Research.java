@@ -24,6 +24,7 @@ public class Research {
     public static List<Object> magnetStructure;
     public static Map<String, IArcaneRecipe> arcaneRecipes = new HashMap<>();
     public static Map<String, IInfusionRecipe> infusionRecipes = new HashMap<>();
+    public static IInfusionRecipe[] clusters = new IInfusionRecipe[10];
     public static ItemStack empty = new ItemStack(ConfigBlocks.blockHole, 1, 15);
 
     public static void init() {
@@ -164,7 +165,7 @@ public class Research {
                 new ResearchPage("classiccasting.research_page.CRYSTALCORE.2"),
                 new ResearchPage(magnetStructure)
             )
-            .setParents("THETHEORYOFEVERYTHING")
+            .setParents("THETHEORYOFEVERYTHING", "CRYSTALCLUSTER")
             .registerResearchItem();
 
         new ResearchItem(
@@ -408,5 +409,26 @@ public class Research {
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY", "ENCHFABRIC")
             .registerResearchItem();
+
+        ResearchPage crystalPage = new ResearchPageInfusion(clusters);
+        crystalPage.recipeOutput = new ItemStack(ConfigBlocks.blockCrystal, 1, 9);
+        new ResearchItem(
+            "CRYSTALCLUSTER", 
+            "CLASSICCASTING",
+            new AspectList()
+                .add(Aspect.CRYSTAL, 24)
+                .add(Aspect.MAGIC, 32)
+                .add(Aspect.EXCHANGE, 24),
+            -2,
+            6,
+            1,
+            new ItemStack(ConfigBlocks.blockCrystal, 1, 9)
+        )
+        .setPages(
+            new ResearchPage("classiccasting.research_page.CRYSTALCLUSTER"),
+            crystalPage
+        )
+        .setParents("BASICFLUX")
+        .registerResearchItem();
     }
 }

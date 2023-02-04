@@ -62,5 +62,6 @@ public class ClassicCasting {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent ev) {
         Research.init();
+        Recipes.removeClusters();
     }
 }

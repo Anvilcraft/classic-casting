@@ -2,10 +2,13 @@ package net.anvilcraft.classiccasting;
 
 import dev.tilera.auracore.api.Aspects;
 import dev.tilera.auracore.api.AuracoreRecipes;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import thaumcraft.api.ThaumcraftApi;
 import thaumcraft.api.aspects.Aspect;
@@ -343,5 +346,74 @@ public class Recipes {
                 Items.ender_pearl
             )
         );
+        addClusters();
+    }
+
+    public static void addClusters() {
+        for (int i = 0; i <= 10; i++) {
+            if (i == 6 || i == 7 || i == 9) continue;
+            int k = i > 6 ? i - 1 : i;
+            Research.clusters[k] = AuracoreRecipes.addShapelessInfusionCraftingRecipe(
+                "CRYSTALCLUSTER" + i, 
+                "CRYSTALCLUSTER", 
+                100, 
+                new AspectList()
+                    .add(Aspect.CRYSTAL, 8)
+                    .add(Aspect.MAGIC, 8)
+                    .add(Aspect.EXCHANGE, 8), 
+                new ItemStack(ConfigBlocks.blockCrystal, 1, i), 
+                new ItemStack(ConfigItems.itemShard, 1, k),
+                new ItemStack(ConfigItems.itemShard, 1, k),
+                new ItemStack(ConfigItems.itemShard, 1, k),
+                new ItemStack(ConfigItems.itemShard, 1, k),
+                new ItemStack(ConfigItems.itemShard, 1, k),
+                new ItemStack(ConfigItems.itemShard, 1, k)
+            );
+        }
+        Research.clusters[6] = AuracoreRecipes.addShapelessInfusionCraftingRecipe(
+            "CRYSTALCLUSTER6", 
+            "CRYSTALCLUSTER", 
+            100, 
+            new AspectList()
+                .add(Aspect.CRYSTAL, 8)
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.EXCHANGE, 8), 
+            new ItemStack(ConfigBlocks.blockCrystal, 1, 6), 
+            new ItemStack(ConfigItems.itemShard, 1, 0),
+            new ItemStack(ConfigItems.itemShard, 1, 1),
+            new ItemStack(ConfigItems.itemShard, 1, 2),
+            new ItemStack(ConfigItems.itemShard, 1, 3),
+            new ItemStack(ConfigItems.itemShard, 1, 4),
+            new ItemStack(ConfigItems.itemShard, 1, 5)
+        );
+        Research.clusters[8] = AuracoreRecipes.addShapelessInfusionCraftingRecipe(
+            "CRYSTALCLUSTER9", 
+            "CRYSTALCLUSTER", 
+            100, 
+            new AspectList()
+                .add(Aspect.CRYSTAL, 8)
+                .add(Aspect.MAGIC, 8)
+                .add(Aspect.EXCHANGE, 8), 
+            new ItemStack(ConfigBlocks.blockCrystal, 1, 9), 
+            new ItemStack(ConfigItems.itemShard, 1, 0),
+            new ItemStack(ConfigItems.itemShard, 1, 1),
+            new ItemStack(ConfigItems.itemShard, 1, 2),
+            new ItemStack(ConfigItems.itemShard, 1, 3),
+            new ItemStack(ConfigItems.itemShard, 1, 7)
+        );
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void removeClusters() {
+        CraftingManager.getInstance().getRecipeList().removeIf((r) -> isCrystalCluster(r));
+    }
+
+    public static boolean isCrystalCluster(Object recipe) {
+        if (!(recipe instanceof IRecipe)) return false;
+        IRecipe r = (IRecipe) recipe;
+        ItemStack output = r.getRecipeOutput();
+        if (output == null) return false;
+        Item item = output.getItem();
+        return Block.getBlockFromItem(item) == ConfigBlocks.blockCrystal;
     }
 }
