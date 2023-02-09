@@ -7,7 +7,6 @@ import net.anvilcraft.classiccasting.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
@@ -61,7 +60,7 @@ public class ItemWandLightning extends ItemWandBasic {
         }
         if (!w.isRemote && e.ticksExisted % 50 == 0 && is.getItemDamage() > 0
             && AuraManager.decreaseClosestAura(w, e.posX, e.posY, e.posZ, 1)) {
-            is.damageItem(-5, (EntityLiving) e);
+            is.damageItem(-5, (EntityLivingBase) e);
             if (is.getItemDamage() < 0) {
                 is.setItemDamage(0);
             }
