@@ -8,6 +8,7 @@ import java.util.Map;
 import dev.tilera.auracore.api.Aspects;
 import dev.tilera.auracore.api.crafting.IInfusionRecipe;
 import dev.tilera.auracore.api.research.ResearchPageInfusion;
+import net.anvilcraft.classiccasting.research.CCResearchManager;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import thaumcraft.api.ThaumcraftApi;
@@ -82,24 +83,24 @@ public class Research {
             new ResourceLocation("thaumcraft", "textures/gui/gui_researchback.png")
         );
 
-        new ResearchItem("CCAURA", "CLASSICCASTING", new AspectList(), -2, -4, 1, new ResourceLocation("classiccasting", "textures/misc/aura.png"))
+        CCResearchManager.addDiscoverableResearch(new ResearchItem("CCAURA", "CLASSICCASTING", new AspectList(), -2, -4, 1, new ResourceLocation("classiccasting", "textures/misc/aura.png"))
             .setPages(
                 new ResearchPage("classiccasting.research_page.CCAURA.1"),
                 new ResearchPage("classiccasting.research_page.CCAURA.2")
             )
             .setAutoUnlock()
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem("CCFLUX", "CLASSICCASTING", new AspectList(), -4, -4, 1, new ResourceLocation("classiccasting", "textures/misc/flux.png"))
+        CCResearchManager.addDiscoverableResearch(new ResearchItem("CCFLUX", "CLASSICCASTING", new AspectList(), -4, -4, 1, new ResourceLocation("classiccasting", "textures/misc/flux.png"))
             .setPages(
                 new ResearchPage("classiccasting.research_page.CCFLUX.1"),
                 new ResearchPage("classiccasting.research_page.CCFLUX.2")
             )
             .setAutoUnlock()
-            .registerResearchItem();
+            .registerResearchItem());
 
         // TODO: move research to right place
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "MAGBLOCKS",
             "CLASSICCASTING",
             new AspectList()
@@ -123,9 +124,9 @@ public class Research {
                 new ResearchPage("classiccasting.research_page.MAGBLOCKS.3")
             )
             .setParents("THAUMIUM")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "AURACOMPASS",
             "CLASSICCASTING",
             new AspectList()
@@ -142,9 +143,9 @@ public class Research {
                 new ResearchPage(arcaneRecipes.get("AuraCompass"))
             )
             .setParents("MAGBLOCKS")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "CRYSTALCORE",
             "CLASSICCASTING",
             new AspectList()
@@ -166,9 +167,9 @@ public class Research {
                 new ResearchPage(magnetStructure)
             )
             .setParents("THETHEORYOFEVERYTHING", "CRYSTALCLUSTER")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "CRYSTALCAPACITOR",
             "CLASSICCASTING",
             new AspectList()
@@ -185,9 +186,9 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("CrystalCapacitor"))
             )
             .setParents("CRYSTALCORE")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "UNIFIEDTHAUMICFIELDTHEORY",
             "CLASSICCASTING",
             new AspectList()
@@ -213,9 +214,9 @@ public class Research {
             )
             .setParents("MAGBLOCKS")
             .setSpecial()
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "WANDFIRE",
             "CLASSICCASTING",
             new AspectList()
@@ -233,9 +234,9 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("WandFire"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "WANDFROST",
             "CLASSICCASTING",
             new AspectList().add(Aspect.COLD, 16).add(Aspect.WEAPON, 4),
@@ -249,9 +250,9 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("WandFrost"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "WANDTRADE",
             "CLASSICCASTING",
             new AspectList()
@@ -268,9 +269,9 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("WandTrade"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "WANDEXCAVATE",
             "CLASSICCASTING",
             new AspectList().add(Aspect.METAL, 16).add(Aspect.TOOL, 4),
@@ -284,9 +285,9 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("WandExcavate"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "WANDLIGHTNING",
             "CLASSICCASTING",
             new AspectList()
@@ -304,9 +305,9 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("WandLightning"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "BASICFLUX",
             "CLASSICCASTING",
             new AspectList()
@@ -328,9 +329,9 @@ public class Research {
                 new ResearchPage("classiccasting.research_page.BASICFLUX.3")
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY", "DISTILESSENTIA")
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "THETHEORYOFEVERYTHING",
             "CLASSICCASTING",
             new AspectList()
@@ -365,9 +366,9 @@ public class Research {
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY", "BASICFLUX", "GOLEMSTRAW")
             .setSpecial()
-            .registerResearchItem();
+            .registerResearchItem());
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "HELLROD",
             "CLASSICCASTING",
             new AspectList()
@@ -386,11 +387,11 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("WandHellrod"))
             )
             .setParents("THETHEORYOFEVERYTHING", "WANDFIRE")
-            .registerResearchItem();
+            .registerResearchItem());
         ThaumcraftApi.addWarpToResearch("HELLROD", 2);
         ThaumcraftApi.addWarpToItem(new ItemStack(CCItems.wandHellrod), 1);
 
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "PORTABLEHOLE",
             "CLASSICCASTING",
             new AspectList()
@@ -408,11 +409,11 @@ public class Research {
                 new ResearchPageInfusion(infusionRecipes.get("PortableHole"))
             )
             .setParents("UNIFIEDTHAUMICFIELDTHEORY", "ENCHFABRIC")
-            .registerResearchItem();
+            .registerResearchItem());
 
         ResearchPage crystalPage = new ResearchPageInfusion(clusters);
         crystalPage.recipeOutput = new ItemStack(ConfigBlocks.blockCrystal, 1, 9);
-        new ResearchItem(
+        CCResearchManager.addDiscoverableResearch(new ResearchItem(
             "CRYSTALCLUSTER", 
             "CLASSICCASTING",
             new AspectList()
@@ -429,6 +430,6 @@ public class Research {
             crystalPage
         )
         .setParents("BASICFLUX")
-        .registerResearchItem();
+        .registerResearchItem());
     }
 }

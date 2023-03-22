@@ -1,6 +1,8 @@
 package net.anvilcraft.classiccasting.research;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import net.anvilcraft.classiccasting.CCItems;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,6 +19,9 @@ import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.research.ResearchManager;
 
 public class CCResearchManager {
+
+    public static Set<String> discoverable = new HashSet<>();
+
     public static ItemStack createNote(ItemStack stack, String key) {
         ResearchItem research = ResearchCategories.getResearch(key);
         if (research == null)
@@ -141,7 +146,8 @@ public class CCResearchManager {
                     )
                     || !ResearchManager.doesPlayerHaveRequisites(
                         player.getDisplayName(), research.key
-                    ))
+                    )
+                    || !isDiscoverable(research.key))
                     continue;
                 int match = 0;
                 for (int q = 0; q < 5; ++q) {
@@ -263,5 +269,18 @@ public class CCResearchManager {
                 = (String) choices.get(player.worldObj.rand.nextInt(choices.size()));
         }
         return bestMatch;
+    }
+
+    public static boolean isDiscoverable(String key) {
+        if (discoverable.contains(key)) {
+            return true;
+        } else {
+            ResearchItem item = ResearchCategories.getResearch(key);
+            return item != null && (item.category == "ALCHEMY" || item.category == "ARTIFICE" || item.category == "GOLEMANCY");
+        }
+    }
+
+    public static void addDiscoverableResearch(ResearchItem research) {
+        discoverable.add(research.key);
     }
 }
