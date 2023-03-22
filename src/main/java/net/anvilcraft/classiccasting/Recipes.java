@@ -195,8 +195,8 @@ public class Recipes {
         Research.infusionRecipes.put(
             "WandTrade",
             AuracoreRecipes.addInfusionCraftingRecipe(
-                "WANDETRADE",
-                "WANDETRADE",
+                "WANDTRADE",
+                "WANDTRADE",
                 50,
                 new AspectList().add(Aspect.EXCHANGE, 16).add(Aspect.TOOL, 4),
                 new ItemStack(CCItems.wandTrade),
