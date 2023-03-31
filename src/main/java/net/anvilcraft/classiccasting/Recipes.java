@@ -269,7 +269,7 @@ public class Recipes {
                     .add(Aspect.AIR, 8)
                     .add(Aspect.WATER, 8)
                     .add(Aspect.CRYSTAL, 8),
-                new ItemStack(ConfigBlocks.blockMetalDevice, 1, 1),
+                new ItemStack(CCBlocks.alembic, 1, 1),
                 "GFG",
                 "J G",
                 "B  ",
