@@ -7,7 +7,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockArcaneWood extends Block {
-
     public BlockArcaneWood() {
         super(Material.wood);
         this.setHardness(2.0f);
@@ -28,8 +27,9 @@ public class BlockArcaneWood extends Block {
     }
 
     @Override
-    public boolean isBeaconBase(IBlockAccess arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6) {
+    public boolean isBeaconBase(
+        IBlockAccess arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6
+    ) {
         return true;
     }
-    
 }

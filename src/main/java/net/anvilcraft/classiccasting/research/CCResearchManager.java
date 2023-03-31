@@ -19,7 +19,6 @@ import thaumcraft.common.config.ConfigItems;
 import thaumcraft.common.lib.research.ResearchManager;
 
 public class CCResearchManager {
-
     public static Set<String> discoverable = new HashSet<>();
 
     public static ItemStack createNote(ItemStack stack, String key) {
@@ -276,7 +275,9 @@ public class CCResearchManager {
             return true;
         } else {
             ResearchItem item = ResearchCategories.getResearch(key);
-            return item != null && (item.category == "ALCHEMY" || item.category == "ARTIFICE" || item.category == "GOLEMANCY");
+            return item != null
+                && (item.category == "ALCHEMY" || item.category == "ARTIFICE"
+                    || item.category == "GOLEMANCY");
         }
     }
 

@@ -51,9 +51,9 @@ public class Recipes {
         Research.arcaneRecipes.put(
             "ArcaneWood1",
             ThaumcraftApi.addArcaneCraftingRecipe(
-                "MAGBLOCKS", 
-                new ItemStack(CCBlocks.blockArcaneWood, 2), 
-                new AspectList().add(Aspects.VIS, 20), 
+                "MAGBLOCKS",
+                new ItemStack(CCBlocks.blockArcaneWood, 2),
+                new AspectList().add(Aspects.VIS, 20),
                 "WWW",
                 "WWW",
                 "WWW",
@@ -65,9 +65,9 @@ public class Recipes {
         Research.arcaneRecipes.put(
             "ArcaneWood2",
             ThaumcraftApi.addArcaneCraftingRecipe(
-                "MAGBLOCKS", 
-                new ItemStack(CCBlocks.blockArcaneWood, 4), 
-                new AspectList().add(Aspects.VIS, 20), 
+                "MAGBLOCKS",
+                new ItemStack(CCBlocks.blockArcaneWood, 4),
+                new AspectList().add(Aspects.VIS, 20),
                 "WW",
                 "WW",
                 'W',
@@ -351,17 +351,18 @@ public class Recipes {
 
     public static void addClusters() {
         for (int i = 0; i <= 10; i++) {
-            if (i == 6 || i == 7 || i == 9) continue;
+            if (i == 6 || i == 7 || i == 9)
+                continue;
             int k = i > 6 ? i - 1 : i;
             Research.clusters[k] = AuracoreRecipes.addShapelessInfusionCraftingRecipe(
-                "CRYSTALCLUSTER" + i, 
-                "CRYSTALCLUSTER", 
-                100, 
+                "CRYSTALCLUSTER" + i,
+                "CRYSTALCLUSTER",
+                100,
                 new AspectList()
                     .add(Aspect.CRYSTAL, 8)
                     .add(Aspect.MAGIC, 8)
-                    .add(Aspect.EXCHANGE, 8), 
-                new ItemStack(ConfigBlocks.blockCrystal, 1, i), 
+                    .add(Aspect.EXCHANGE, 8),
+                new ItemStack(ConfigBlocks.blockCrystal, 1, i),
                 new ItemStack(ConfigItems.itemShard, 1, k),
                 new ItemStack(ConfigItems.itemShard, 1, k),
                 new ItemStack(ConfigItems.itemShard, 1, k),
@@ -371,14 +372,14 @@ public class Recipes {
             );
         }
         Research.clusters[6] = AuracoreRecipes.addShapelessInfusionCraftingRecipe(
-            "CRYSTALCLUSTER6", 
-            "CRYSTALCLUSTER", 
-            100, 
+            "CRYSTALCLUSTER6",
+            "CRYSTALCLUSTER",
+            100,
             new AspectList()
                 .add(Aspect.CRYSTAL, 8)
                 .add(Aspect.MAGIC, 8)
-                .add(Aspect.EXCHANGE, 8), 
-            new ItemStack(ConfigBlocks.blockCrystal, 1, 6), 
+                .add(Aspect.EXCHANGE, 8),
+            new ItemStack(ConfigBlocks.blockCrystal, 1, 6),
             new ItemStack(ConfigItems.itemShard, 1, 0),
             new ItemStack(ConfigItems.itemShard, 1, 1),
             new ItemStack(ConfigItems.itemShard, 1, 2),
@@ -387,14 +388,14 @@ public class Recipes {
             new ItemStack(ConfigItems.itemShard, 1, 5)
         );
         Research.clusters[8] = AuracoreRecipes.addShapelessInfusionCraftingRecipe(
-            "CRYSTALCLUSTER9", 
-            "CRYSTALCLUSTER", 
-            100, 
+            "CRYSTALCLUSTER9",
+            "CRYSTALCLUSTER",
+            100,
             new AspectList()
                 .add(Aspect.CRYSTAL, 8)
                 .add(Aspect.MAGIC, 8)
-                .add(Aspect.EXCHANGE, 8), 
-            new ItemStack(ConfigBlocks.blockCrystal, 1, 9), 
+                .add(Aspect.EXCHANGE, 8),
+            new ItemStack(ConfigBlocks.blockCrystal, 1, 9),
             new ItemStack(ConfigItems.itemShard, 1, 0),
             new ItemStack(ConfigItems.itemShard, 1, 1),
             new ItemStack(ConfigItems.itemShard, 1, 2),
@@ -405,14 +406,18 @@ public class Recipes {
 
     @SuppressWarnings("unchecked")
     public static void removeClusters() {
-        CraftingManager.getInstance().getRecipeList().removeIf((r) -> isCrystalCluster(r));
+        CraftingManager.getInstance().getRecipeList().removeIf(
+            (r) -> isCrystalCluster(r)
+        );
     }
 
     public static boolean isCrystalCluster(Object recipe) {
-        if (!(recipe instanceof IRecipe)) return false;
+        if (!(recipe instanceof IRecipe))
+            return false;
         IRecipe r = (IRecipe) recipe;
         ItemStack output = r.getRecipeOutput();
-        if (output == null) return false;
+        if (output == null)
+            return false;
         Item item = output.getItem();
         return Block.getBlockFromItem(item) == ConfigBlocks.blockCrystal;
     }

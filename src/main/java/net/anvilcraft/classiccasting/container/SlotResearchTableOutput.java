@@ -18,7 +18,8 @@ class SlotResearchTableOutput extends Slot {
     }
 
     public boolean isItemValid(ItemStack par1ItemStack) {
-        return (par1ItemStack.getItem() == CCItems.researchNotes || par1ItemStack.getItem() == ConfigItems.itemResearchNotes)
+        return (par1ItemStack.getItem() == CCItems.researchNotes
+                || par1ItemStack.getItem() == ConfigItems.itemResearchNotes)
             && par1ItemStack.getItemDamage() < 64;
     }
 
@@ -27,7 +28,9 @@ class SlotResearchTableOutput extends Slot {
         if (note != null && note.getItem() == ConfigItems.itemResearchNotes) {
             ResearchNoteData data = ResearchManager.getData(note);
             if (data != null && !CCResearchManager.isDiscoverable(data.key)) {
-                note = CCResearchManager.createNote(new ItemStack(CCItems.researchNotes), data.key);
+                note = CCResearchManager.createNote(
+                    new ItemStack(CCItems.researchNotes), data.key
+                );
             } else {
                 note = new ItemStack(Items.paper);
             }
