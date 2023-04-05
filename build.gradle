@@ -23,7 +23,7 @@ apply plugin: 'maven-publish'
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-version = "1.4.0"
+version = "1.4.1"
 group = "net.anvilcraft"
 archivesBaseName = "classic-casting"
 
