@@ -1,5 +1,7 @@
 package net.anvilcraft.classiccasting.tiles;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.client.FMLClientHandler;
 import dev.tilera.auracore.api.AuraNode;
 import dev.tilera.auracore.aura.AuraManager;
@@ -136,48 +138,9 @@ public class TileCrystalCore extends TileEntity {
                     }
                 }
             }
-            if (dev.tilera.auracore.helper.Utils.hasGoggles(
-                    FMLClientHandler.instance().getClientPlayerEntity()
-                )
-                && this.active && this.nodeKey > -1 && this.speed > 0.9
-                && AuraManagerClient.auraClientMovementList.get(this.nodeKey) != null
-                && this.count % 20 == 0) {
-                final AuraManagerClient.NodeRenderInfo nri
-                    = AuraManagerClient.auraClientMovementList.get(this.nodeKey);
-                float size = 3.0f;
-                final NodeStats l = AuraManagerClient.auraClientList.get(this.nodeKey);
-                if (l != null) {
-                    size = l.level / 100.0f;
-                }
-                Thaumcraft.proxy.beam(
-                    this.worldObj,
-                    this.xCoord + 0.5,
-                    this.yCoord + 0.5 + this.speed,
-                    this.zCoord + 0.5,
-                    nri.x,
-                    nri.y,
-                    nri.z,
-                    0,
-                    16777215,
-                    true,
-                    size,
-                    20
-                );
-                Thaumcraft.proxy.beam(
-                    this.worldObj,
-                    this.xCoord + 0.5,
-                    this.yCoord + 0.5 + this.speed,
-                    this.zCoord + 0.5,
-                    nri.x,
-                    nri.y,
-                    nri.z,
-                    1,
-                    16777215,
-                    true,
-                    size / 2.0f,
-                    20
-                );
-            }
+
+            this.renderBeam();
+
             return;
         }
         if (this.active && this.speed > 0.9f && this.count % 20 == 0) {
@@ -317,4 +280,51 @@ public class TileCrystalCore extends TileEntity {
     //        }
     //    }
     //}
+
+    // FIXME: move into TESR
+    @SideOnly(Side.CLIENT)
+    void renderBeam() {
+        if (dev.tilera.auracore.helper.Utils.hasGoggles(
+                FMLClientHandler.instance().getClientPlayerEntity()
+            )
+            && this.active && this.nodeKey > -1 && this.speed > 0.9
+            && AuraManagerClient.auraClientMovementList.get(this.nodeKey) != null
+            && this.count % 20 == 0) {
+            final AuraManagerClient.NodeRenderInfo nri
+                = AuraManagerClient.auraClientMovementList.get(this.nodeKey);
+            float size = 3.0f;
+            final NodeStats l = AuraManagerClient.auraClientList.get(this.nodeKey);
+            if (l != null) {
+                size = l.level / 100.0f;
+            }
+            Thaumcraft.proxy.beam(
+                this.worldObj,
+                this.xCoord + 0.5,
+                this.yCoord + 0.5 + this.speed,
+                this.zCoord + 0.5,
+                nri.x,
+                nri.y,
+                nri.z,
+                0,
+                16777215,
+                true,
+                size,
+                20
+            );
+            Thaumcraft.proxy.beam(
+                this.worldObj,
+                this.xCoord + 0.5,
+                this.yCoord + 0.5 + this.speed,
+                this.zCoord + 0.5,
+                nri.x,
+                nri.y,
+                nri.z,
+                1,
+                16777215,
+                true,
+                size / 2.0f,
+                20
+            );
+        }
+    }
 }
